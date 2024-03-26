@@ -1,4 +1,4 @@
 export const ROUTES_GLOBAL = {
-  ROOT: "/",
+  SUMMARY: "/summary",
   DETAILS: "/details",
 };

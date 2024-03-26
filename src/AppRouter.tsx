@@ -11,9 +11,9 @@ function AppRouter() {
         path={`${ROUTES_GLOBAL.DETAILS}`}
         element={<CategoriesDetailsReport />}
       />
-      <Route path={`${ROUTES_GLOBAL.ROOT}`} element={<CategoriesReport />} />
+      <Route path={`${ROUTES_GLOBAL.SUMMARY}`} element={<CategoriesReport />} />
 
-      <Route path="*" element={<Navigate to={ROUTES_GLOBAL.ROOT} />} />
+      <Route path="*" element={<Navigate to={ROUTES_GLOBAL.SUMMARY} />} />
     </Routes>
   );
 }
