@@ -1,0 +1,21 @@
+@import "@/styles/variables/fonts.scss";
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+
+  @include f--b0-light;
+
+  .icon {
+    width: 16px;
+    height: 16px;
+
+    svg {
+      color: var(--color-carbon);
+    }
+  }
+}
