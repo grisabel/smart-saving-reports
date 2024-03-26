@@ -1,19 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTES_GLOBAL } from "./routes";
-
-import CategoriesDetailsReport from "./pages/CategoriesDetailsReport";
-import CategoriesReport from "./pages/CategoriesReport";
+import ReportsRouter from "./pages/Reports/view/ReportsRouter";
 
 function AppRouter() {
   return (
     <Routes>
-      <Route
-        path={`${ROUTES_GLOBAL.DETAILS}`}
-        element={<CategoriesDetailsReport />}
-      />
-      <Route path={`${ROUTES_GLOBAL.SUMMARY}`} element={<CategoriesReport />} />
+      <Route path={`${ROUTES_GLOBAL.REPORTS}/*`} element={<ReportsRouter />} />
 
-      <Route path="*" element={<Navigate to={ROUTES_GLOBAL.SUMMARY} />} />
+      <Route path="*" element={<Navigate to={`${ROUTES_GLOBAL.REPORTS}`} />} />
     </Routes>
   );
 }
