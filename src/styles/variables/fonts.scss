@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+._f{
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+._f--b1{
+    @extend ._f;
+    $size: 1rem;
+    
+    font-size: $size;
+    line-height: $size * 1.5;
+}
+
+._f--b2{
+    @extend ._f;
+    $size: 0.75rem;
+    
+    font-size: $size;
+    line-height: $size * 1.5;
+}
+
+@mixin f--b1-bold{
+    @extend ._f--b1;
+    font-weight: bold;
+}
+
+@mixin f--b1-regular{
+    @extend ._f--b1;
+    font-weight: normal;
+}
+
+@mixin f--b1-light{
+    @extend ._f--b1;
+    font-weight: lighter;
+}
+
+@mixin f--b2-bold{
+    @extend ._f--b2;
+    font-weight: bold;
+}
+
+@mixin f--b2-regular{
+    @extend ._f--b2;
+    font-weight: normal;
+}
+
+@mixin f--b2-light{
+    @extend ._f--b2;
+    font-weight: lighter;
+}
