@@ -1,0 +1,11 @@
+{
+    "srcFiles": ["./src/styles/assets/svg/**/*.svg"],
+    "outputDirectory": "./src/components/stories/atoms/Icon/SmartSavingsIcon",
+    "interfaceName": "SmartSavingsIcon",
+    "typeName": "SmartSavingsIconName",
+    "prefix": "smartsaving",
+    "delimiter": "KEBAB",
+    "fileName": "smartsavings-icon.model",
+    "additionalModelOutputPath": "./src/components/stories/atoms/Icon/SmartSavingsIcon/lib",
+    "compileSources": true
+}
