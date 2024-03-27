@@ -3,6 +3,7 @@ import { CategoryType } from "../../../CategoriesDetailsReport/context/Categorie
 import { useEffect, useState } from "react";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { CategortListResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
+import { useAppCtx } from "@/AppProvider";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
@@ -12,10 +13,12 @@ interface CategoryListProps {
 
 const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
   const [data, setData] = useState<CategortListResponseModel | null>(null);
+  const { setLoading } = useAppCtx();
 
   // todoUseCategory.getCategory
 
   useEffect(() => {
+    setLoading(true);
     reportsRepository
       .categoryList({
         categoryType,
@@ -25,6 +28,12 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
       .then((resul) => {
         console.log({ resul });
         setData(resul);
+      })
+      .catch((error) => {
+        console.log({ error });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 

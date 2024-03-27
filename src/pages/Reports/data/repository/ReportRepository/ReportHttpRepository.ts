@@ -5,6 +5,8 @@ import { CategortListResponseModel } from "./model/response/CategortListResponse
 import { CategoryListResquestModel } from "./model/request/CategoryListRequestModel";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { DATE_FORMATS } from "@/utils/Datetime/constants";
+import { TransactionListResquestModel } from "./model/request/TransactionListRequestModel";
+import { TransactionResponseModel } from "./model/response/TransactionListResponseModel";
 
 export class ReportHttpRepository implements ReportInterfaceRepository {
   constructor(private http: HttpInterfaceService) {}
@@ -26,6 +28,66 @@ export class ReportHttpRepository implements ReportInterfaceRepository {
             import.meta.env.VITE_BASE_URL +
             url
               .replace(":accountNumber", "0")
+              .replace(
+                ":dateStart",
+                encodeURIComponent(
+                  DateTimeService.parse(
+                    requestModel.dateStart,
+                    DATE_FORMATS.Date
+                  )
+                )
+              )
+              .replace(
+                ":dateEnd",
+                encodeURIComponent(
+                  DateTimeService.parse(requestModel.dateEnd, DATE_FORMATS.Date)
+                )
+              ),
+        })
+        .then((response) => {
+          try {
+            switch (response.status) {
+              case 200:
+                resolve(response.json());
+                break;
+
+              default:
+                reject();
+                break;
+            }
+          } catch (error) {
+            console.log("Error in response.json()");
+            reject();
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+          reject();
+        });
+    });
+  }
+
+  transactionList(
+    requestModel: TransactionListResquestModel
+  ): Promise<TransactionResponseModel> {
+    return new Promise((resolve, reject) => {
+      const urlIcome =
+        "/financial-control/accounts/:accountNumber/reports/income/:conceptId?dateFrom=:dateStart&dateTo=:dateEnd";
+      const urlExpense =
+        "/financial-control/accounts/:accountNumber/reports/expense/:conceptId?dateFrom=:dateStart&dateTo=:dateEnd";
+      const url =
+        requestModel.categoryType === "EXPENSE" ? urlExpense : urlIcome;
+
+      return this.http
+        .get<TransactionResponseModel>({
+          endpoint:
+            import.meta.env.VITE_BASE_URL +
+            url
+              .replace(":accountNumber", "0")
+              .replace(":conceptId", requestModel.categoryId)
               .replace(
                 ":dateStart",
                 encodeURIComponent(

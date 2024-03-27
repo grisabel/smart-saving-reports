@@ -51,7 +51,7 @@ export const useCategoriesDetailsCtx =
     const context = useContext(CategoriesDetailsContext);
     if (!context) {
       throw new Error(
-        "useCategoriesDetailsCtx must be used within a OnboardingProvider"
+        "useCategoriesDetailsCtx must be used within a CategoriesDetailsProvider"
       );
     }
     return context;
