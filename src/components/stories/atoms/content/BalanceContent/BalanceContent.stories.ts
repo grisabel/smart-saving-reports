@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import BalanceContent from "./BalanceContent";
 
 const meta = {
-  title: "Atoms/content/BalanceContent",
+  title: "Atoms/Content/BalanceContent",
   component: BalanceContent,
   parameters: {
     layout: "centered",

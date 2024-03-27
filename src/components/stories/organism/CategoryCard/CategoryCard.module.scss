@@ -35,10 +35,10 @@
         width: 48px;
       }
       &--income {
-        color: green;
+        color: var(--success-main);
       }
       &--expense {
-        color: red;
+        color: var(--red-main);
       }
     }
   }
