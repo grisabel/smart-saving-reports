@@ -1,8 +1,37 @@
 import WithApp from "@/WithApp";
 import ReactDOM from "react-dom/client";
+import TransactionDetailsModal from "./components/TransactionDetailsModal";
+import { TransactionDataFilter } from "./components/TransactionDetailsModal/TransactionDetailsModal";
+import { useState } from "react";
+import DateTimeService from "@/utils/Datetime/DatetimeService";
 
 const CategoriesDetailsReport: React.FC = () => {
-  return <h1>CategoriesDetailsReport</h1>;
+  const [filter, setFilter] = useState<TransactionDataFilter | null>(null);
+
+  const openDetails = () => {
+    setFilter(() => {
+      return {
+        category: "EXPENSE-1",
+        dateStart: DateTimeService.currentDate(),
+        dateEnd: DateTimeService.currentDate(),
+      };
+    });
+  };
+
+  const handleCleanFilter = () => {
+    setFilter(() => null);
+  };
+
+  return (
+    <div>
+      <h1>CategoriesDetailsReport</h1>
+      <button onClick={openDetails}>Open Details</button>
+      <TransactionDetailsModal
+        filter={filter}
+        cleanFilter={handleCleanFilter}
+      />
+    </div>
+  );
 };
 
 export default CategoriesDetailsReport;
