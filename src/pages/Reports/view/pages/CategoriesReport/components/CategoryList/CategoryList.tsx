@@ -1,7 +1,8 @@
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
 import { CategoryType } from "../../../CategoriesDetailsReport/context/CategoriesDetailsContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
+import { CategortListResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
@@ -10,6 +11,10 @@ interface CategoryListProps {
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
+  const [data, setData] = useState<CategortListResponseModel | null>(null);
+
+  // todoUseCategory.getCategory
+
   useEffect(() => {
     reportsRepository
       .categoryList({
@@ -19,10 +24,16 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
       })
       .then((resul) => {
         console.log({ resul });
+        setData(resul);
       });
   }, []);
 
-  return <h1>CategoryList</h1>;
+  return (
+    <div>
+      <h1>CategoryList</h1>
+      <p>{JSON.stringify(data)}</p>
+    </div>
+  );
 };
 
 export default CategoryList;
