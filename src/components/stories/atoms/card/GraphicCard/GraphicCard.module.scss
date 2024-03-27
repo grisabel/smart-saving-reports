@@ -36,13 +36,12 @@
       }
       &--income {
         svg {
-          color: green !important;
+          color: var(--success-main) !important;
         }
       }
       &--expense {
-        color: red;
         svg {
-          color: red !important;
+          color: var(--red-main) !important;
         }
       }
     }

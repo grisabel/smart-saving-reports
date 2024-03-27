@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ContentBase from "./ContentBase";
 
 const meta = {
-  title: "Atoms/content/ContentBase",
+  title: "Atoms/Content/ContentBase",
   component: ContentBase,
   parameters: {
     layout: "centered",
