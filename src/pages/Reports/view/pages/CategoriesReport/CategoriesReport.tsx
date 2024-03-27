@@ -1,9 +1,16 @@
 import WithApp from "@/WithApp";
 import ReactDOM from "react-dom/client";
+import CategoryList from "./components/CategoryList/CategoryList";
 
 const CategoriesReport: React.FC = () => {
   console.log("CategoriesReport");
-  return <h1>CategoriesReport</h1>;
+  return (
+    <div>
+      <h1>CategoriesReport</h1>
+      <CategoryList categoryType="EXPENSE" />
+      <CategoryList categoryType="INCOME" />
+    </div>
+  );
 };
 
 export default CategoriesReport;
