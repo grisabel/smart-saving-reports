@@ -38,8 +38,12 @@
 
     .header {
       width: 100%;
-      padding: 0 24px;
+      padding: 0 16px;
       position: relative;
+
+      @media (min-width: $bpDtMin) {
+        padding: 0 24px;
+      }
 
       .title {
         color: black;
@@ -62,43 +66,13 @@
     }
 
     .content {
-      padding: 0 24px;
+      padding: 0 16px;
 
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
 
-      @media (min-width: $bpSmMin) {
-        padding: 0 48px;
-      }
-    }
-
-    .footer {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 16px;
-      padding: 0 24px;
-      @media (min-width: $bpSmMin) {
-        padding: 0 48px;
-      }
-
-      .footer-btns {
-        padding-top: 16px;
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
-        justify-content: center;
-
-        * {
-          flex-grow: 1;
-          max-width: 360px;
-        }
-
-        button {
-          @include f--b2-light;
-          height: 38px;
-          svg {
-            scale: 0.8;
-          }
-        }
+      @media (min-width: $bpDtMin) {
+        padding: 0 24px;
       }
     }
   }
