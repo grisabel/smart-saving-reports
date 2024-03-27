@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Btn1Example: Story = {
-  args: { iconName: "bets" },
+  args: { iconName: "bets", readOnly: true },
 };
 
 export const Btb2Example: Story = {
