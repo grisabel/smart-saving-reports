@@ -105,4 +105,54 @@ httpMock.onGet(
   }
 );
 
+httpMock.onGet(
+  "/financial-control/accounts/:accountNumber/reports/income/:conceptId?dateFrom=:dateStart&dateTo=:dateEnd",
+  ({ params }) => {
+    return Promise.resolve({
+      status: 200,
+      response: [
+        {
+          transactionId: "0376a09d-19da-4de3-b872-9bcc1d7b3d4b",
+          amount: 12.39,
+          conceptId: params?.conceptId ?? "",
+          date: "01/01/2024",
+          note: "nota 0",
+        },
+        {
+          transactionId: "6a22fc67-ffb2-4754-958f-2a3045de5eb1",
+          amount: 63.18,
+          conceptId: params?.conceptId ?? "",
+          date: "01/01/2024",
+          note: "nota 1",
+        },
+      ],
+    });
+  }
+);
+
+httpMock.onGet(
+  "/financial-control/accounts/:accountNumber/reports/expense/:conceptId?dateFrom=:dateStart&dateTo=:dateEnd",
+  ({ params }) => {
+    return Promise.resolve({
+      status: 200,
+      response: [
+        {
+          transactionId: "05a5aa03-7fb5-4fc4-bad6-f03d5bbfe64a",
+          amount: 84.77,
+          conceptId: params?.conceptId ?? "",
+          date: "01/01/2024",
+          note: "nota 1",
+        },
+        {
+          transactionId: "b1ae8ad1-fe58-438e-91f4-ff91b4de0279",
+          amount: 84.26,
+          conceptId: params?.conceptId ?? "",
+          date: "01/01/2024",
+          note: "nota 0",
+        },
+      ],
+    });
+  }
+);
+
 export class UserMockRepository extends ReportHttpRepository {}
