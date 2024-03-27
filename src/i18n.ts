@@ -16,11 +16,15 @@ i18n
       en: {
         translation: {
           balance: "Balance",
+          expenses: "Expenses",
+          income: "Income",
         },
       },
       es: {
         translation: {
           balance: "Balance",
+          expenses: "Gastos",
+          income: "Ingresos",
         },
       },
     },
