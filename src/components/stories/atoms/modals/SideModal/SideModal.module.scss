@@ -10,18 +10,13 @@
   display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 
   .modal {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    width: 95%;
-    max-width: 600px;
-
-    max-height: 95%;
 
     border-radius: 8px;
     background-color: white;
@@ -30,6 +25,17 @@
 
     z-index: z-index(modal);
 
+    width: 100%;
+    height: 100%;
+
+    @media (min-width: $bpMdMin) {
+      max-width: 275px;
+    }
+
+    @media (min-width: $bpDtMin) {
+      max-width: 350px;
+    }
+
     .header {
       width: 100%;
       padding: 0 24px;
@@ -37,8 +43,9 @@
 
       .title {
         color: black;
-        @include f--b1-bold;
-        text-align: center;
+        @include f--b0-regular;
+        text-align: left;
+        vertical-align: middle;
 
         padding-top: 16px;
       }
