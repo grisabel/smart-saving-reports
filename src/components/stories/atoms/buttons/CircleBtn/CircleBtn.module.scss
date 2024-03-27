@@ -1,6 +1,6 @@
 .CircleBtnWp {
-  width: 36px;
-  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border: none;
   border-radius: 18px;
   background-color: #fff;
@@ -37,7 +37,6 @@
 
   &:hover {
     outline: solid 1px var(--blue-main);
-    box-shadow: none;
     cursor: pointer;
 
     .delete {

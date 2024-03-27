@@ -15,6 +15,9 @@ i18n
     resources: {
       en: {
         translation: {
+          year: "Year",
+          month: "Month",
+
           balance: "Balance",
           expenses: "Expenses",
           income: "Income",
@@ -22,6 +25,9 @@ i18n
       },
       es: {
         translation: {
+          year: "Año",
+          month: "Mes",
+
           balance: "Balance",
           expenses: "Gastos",
           income: "Ingresos",

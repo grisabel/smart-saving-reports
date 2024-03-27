@@ -1,33 +1,14 @@
 import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 import CardBase from "../../card/CardBase";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
-import {
-  CalendarRangePickerChangeEvent,
-  CalendarRangePickerProps,
-} from "./CalendarRangePicker.types";
+import { CalendarRangePickerProps } from "./CalendarRangePicker.types";
 import { useEffect, useState } from "react";
 import { DATE_FORMATS } from "@/utils/Datetime/constants";
 import Icon from "../../Icon";
 
 import styles from "./CalendarRangePicker.module.scss";
-
-{
-  /* <app-circle-btn
-    *ngIf="!onlyRead"
-    iconName="chevron-left"
-    [disabled]="disableDecrement()"
-    (onClick)="handleDecrement()"
-  /> */
-}
-
-{
-  /* <app-circle-btn
-    *ngIf="!onlyRead"
-    iconName="chevron-right"
-    [disabled]="disableIncrement()"
-    (onClick)="handleIncrement()"
-  /> */
-}
+import CircleBtn from "../../buttons/CircleBtn/CircleBtn";
+import { useTranslation } from "react-i18next";
 
 const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
   dateMax,
@@ -37,13 +18,15 @@ const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
   onChange = () => null,
   ...props
 }) => {
-  const [format, setFormat] = useState("year" || "month");
+  const { t } = useTranslation();
+
   const [isYear, setIsYear] = useState(props.isYear);
+  const [format, setFormat] = useState<"year" | "month">("year" || "month");
 
   useEffect(() => {
-    setFormat(format);
-    setIsYear(format === "year");
-  }, [format]);
+    setFormat(props.format);
+    setIsYear(props.format === "year");
+  }, [props.format]);
 
   const [dateStart, setDateStart] = useState<DateTimeModel>(props.dateStart);
   const [disableDecrement, setDisableDecrement] = useState(false);
@@ -181,13 +164,20 @@ const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
 
   return (
     <div className={styles.CalendarRangePickerWP}>
+      {!onlyRead && (
+        <CircleBtn
+          iconName="chevron-left"
+          disabled={disableDecrement}
+          onClick={handleDecrement}
+        />
+      )}
       <CardBase
         onClick={handleClick}
         disabled={onlyRead || disableFormatChange}
       >
         <div className={styles.container}>
           <div className={styles.data}>
-            <p className={styles.title}>{isYear ? "year" : "month"}</p>
+            <p className={styles.title}>{isYear ? t("year") : t("month")}</p>
             <p className={styles.date}>{displayDate()}</p>
           </div>
           <div className={styles.icon}>
@@ -195,6 +185,13 @@ const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
           </div>
         </div>
       </CardBase>
+      {!onlyRead && (
+        <CircleBtn
+          iconName="chevron-right"
+          disabled={disableIncrement}
+          onClick={handleIncrement}
+        />
+      )}
     </div>
   );
 };
