@@ -1,12 +1,32 @@
 import WithApp from "@/WithApp";
 import ReactDOM from "react-dom/client";
 import CategoryList from "./components/CategoryList/CategoryList";
+import LinkBack from "@/components/stories/atoms/links/LinkBack";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import BalanceContent from "@/components/stories/atoms/content/BalanceContent";
 
 const CategoriesReport: React.FC = () => {
-  console.log("CategoriesReport");
+  const { t } = useTranslation();
+  const [isExpense] = useState<boolean>(true);
+
+  const handleReturn = () => {
+    console.log("RETURN");
+  };
+
   return (
     <div>
-      <h1>CategoriesReport</h1>
+      <LinkBack
+        label={isExpense ? t("expenses") : t("income")}
+        onClick={handleReturn}
+      />
+      <div>
+        <BalanceContent
+          title={isExpense ? t("expenses") : t("income")}
+          amount={"200"}
+          type={isExpense ? "expense" : "income"}
+        />
+      </div>
       <CategoryList categoryType="EXPENSE" />
       <CategoryList categoryType="INCOME" />
     </div>
