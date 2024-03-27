@@ -41,12 +41,12 @@ const TransactionDetailsModal: React.FC = () => {
       })
       .then((resul) => {
         setDate(resul);
+        setOpen(true);
       })
       .catch((error) => {
         console.log({ error });
       })
       .finally(() => {
-        setOpen(true);
         setLoading(false);
       });
   }, [filter]);
