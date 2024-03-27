@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./GraphicCard.module.scss";
 
-import CardBase from "../CardBase";
+import CardBase from "@/components/stories/atoms/card/CardBase";
 import Icon from "@/components/stories/atoms/Icon";
 import { SmartSavingsIconName } from "../../Icon/SmartSavingsIcon";
 

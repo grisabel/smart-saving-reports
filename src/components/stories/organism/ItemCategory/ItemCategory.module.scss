@@ -1,0 +1,56 @@
+@import "@/styles/variables/fonts.scss";
+@import "@/styles/variables/breakpoints.scss";
+
+.cardBase {
+  border-radius: 0;
+  box-shadow: none;
+
+  .itemCategoryWp {
+    height: 66px;
+    width: 300px;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @include f--b2-light;
+
+    @media (min-width: $bpMdMin) {
+      width: 320px;
+      $size: 1rem;
+
+      font-size: $size;
+      line-height: $size * 1.5;
+    }
+
+    button {
+      transform: scale(0.9);
+      width: 48px;
+      flex-shrink: 0;
+    }
+
+    .data {
+      flex-grow: 1;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+
+      .amount {
+        width: 34px;
+        flex-shrink: 0;
+        @media (min-width: $bpMdMin) {
+          width: 48px;
+        }
+        &--income {
+          color: green;
+        }
+        &--expense {
+          color: red;
+        }
+      }
+    }
+  }
+}
