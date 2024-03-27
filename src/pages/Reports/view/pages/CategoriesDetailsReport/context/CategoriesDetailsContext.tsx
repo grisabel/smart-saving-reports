@@ -6,32 +6,37 @@ import React, {
   useState,
 } from "react";
 import { TransactionDataFilter } from "../components/TransactionDetailsModal/TransactionDetailsModal";
+import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 
-type CategoryType = "INCOME" | "EXPENSE";
+export type CategoryType = "INCOME" | "EXPENSE";
 
 interface CategoriesDetailsContextInterface {
-  type: CategoryType | null;
-  filter: TransactionDataFilter | null;
+  categoryType: CategoryType;
+  filter: TransactionDataFilter;
 
-  setType: (value: CategoryType) => void;
-  setFilter: Dispatch<SetStateAction<TransactionDataFilter | null>>;
+  setFilter: Dispatch<SetStateAction<TransactionDataFilter>>;
 }
 
 const CategoriesDetailsContext =
   createContext<CategoriesDetailsContextInterface | null>(null);
 
-const CategoriesDetailsProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [filter, setFilter] = useState<TransactionDataFilter | null>(null);
-  const [type, setType] = useState<CategoryType | null>(null);
+const CategoriesDetailsProvider: React.FC<{
+  children: React.ReactNode;
+  categoryType: CategoryType;
+  dateStart: DateTimeModel;
+  dateEnd: DateTimeModel;
+}> = ({ children, categoryType, dateEnd, dateStart }) => {
+  const [filter, setFilter] = useState<TransactionDataFilter>({
+    category: null,
+    dateStart,
+    dateEnd,
+  });
 
   const context = {
     filter,
     setFilter,
 
-    type,
-    setType,
+    categoryType,
   };
 
   return (

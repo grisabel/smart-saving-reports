@@ -1,5 +1,4 @@
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
-import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext";
 
 import styles from "./CategoryDetails.scss";
@@ -7,21 +6,25 @@ import styles from "./CategoryDetails.scss";
 const categoryRespository = CategoryFactoryRespository.getInstance();
 
 const CategoryDetails: React.FC = () => {
-  const { setFilter } = useCategoriesDetailsCtx();
+  const { setFilter, categoryType } = useCategoriesDetailsCtx();
 
   const openDetails = (category: string) => {
-    setFilter(() => {
+    setFilter((prevFilter) => {
       return {
+        ...prevFilter,
         category,
-        dateStart: DateTimeService.currentDate(),
-        dateEnd: DateTimeService.currentDate(),
       };
     });
   };
 
+  const categoryList =
+    categoryType === "EXPENSE"
+      ? categoryRespository.getExpenseList
+      : categoryRespository.getIcomeList;
+
   return (
     <ul>
-      {categoryRespository.getExpenseList().map((expense) => {
+      {categoryList().map((expense) => {
         return (
           <li onClick={() => openDetails(expense.id)}>{expense.concept}</li>
         );

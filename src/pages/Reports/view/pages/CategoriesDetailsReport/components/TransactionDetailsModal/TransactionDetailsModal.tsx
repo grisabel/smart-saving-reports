@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext";
 
 export interface TransactionDataFilter {
-  category: string;
+  category: string | null;
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
 }
@@ -26,7 +26,10 @@ const TransactionDetailsModal: React.FC = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setFilter(() => null);
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      category: null,
+    }));
   };
 
   return (
