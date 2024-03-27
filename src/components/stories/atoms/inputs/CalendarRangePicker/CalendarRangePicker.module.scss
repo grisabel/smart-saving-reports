@@ -1,0 +1,43 @@
+@import "@/styles/variables/fonts.scss";
+
+.CalendarRangePickerWP {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+
+  .card-base {
+    width: calc(100% - 104px);
+  }
+
+  .container {
+    flex-grow: 1;
+    display: flex;
+    width: 100%;
+    min-width: 140px;
+    justify-content: space-between;
+    padding: 16px;
+    gap: 16px;
+    user-select: none;
+
+    .data {
+      .title {
+        @include f--b1-light;
+        color: var(--blue-main);
+      }
+      .date {
+        @include f--b1-light;
+      }
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+
+      svg {
+        transform: scale(1.2);
+        color: var(--blue-main);
+      }
+    }
+  }
+}
