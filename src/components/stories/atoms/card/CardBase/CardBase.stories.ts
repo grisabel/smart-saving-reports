@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CardBase from "./CardBase";
 
 const meta = {
-  title: "Atoms/card/CardBase",
+  title: "Atoms/Card/CardBase",
   component: CardBase,
   parameters: {
     layout: "centered",
