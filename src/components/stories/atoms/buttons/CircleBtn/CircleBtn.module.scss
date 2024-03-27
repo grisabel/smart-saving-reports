@@ -1,0 +1,58 @@
+.CircleBtnWp {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 1px rgba(15, 23, 42, 0.1);
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    svg {
+      color: var(--blue-main);
+    }
+  }
+
+  .add {
+    svg {
+      transform: scale(0.7);
+      color: var(--blue-main);
+    }
+  }
+
+  .edit {
+    svg {
+      transform: scale(0.5);
+      color: var(--blue-main);
+    }
+  }
+
+  .delete {
+    svg {
+      transform: scale(0.6);
+      color: var(--red-main);
+    }
+  }
+
+  &:hover {
+    outline: solid 1px var(--blue-main);
+    box-shadow: none;
+    cursor: pointer;
+
+    .delete {
+      color: var(--red-main);
+    }
+  }
+
+  &[disabled] {
+    cursor: auto;
+    outline: none;
+
+    .icon {
+      svg {
+        color: var(--grey-main);
+      }
+    }
+  }
+}
