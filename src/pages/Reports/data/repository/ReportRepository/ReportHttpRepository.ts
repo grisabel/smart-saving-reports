@@ -14,9 +14,9 @@ export class ReportHttpRepository implements ReportInterfaceRepository {
   ): Promise<CategortListResponseModel> {
     return new Promise((resolve, reject) => {
       const urlIcome =
-        "financial-control/accounts/:accountNumber/reports/income?dateFrom=:dateStart&dateTo=:dateEnd";
+        "/financial-control/accounts/:accountNumber/reports/income?dateFrom=:dateStart&dateTo=:dateEnd";
       const urlExpense =
-        "financial-control/accounts/:accountNumber/reports/expense?dateFrom=:dateStart&dateTo=:dateEnd";
+        "/financial-control/accounts/:accountNumber/reports/expense?dateFrom=:dateStart&dateTo=:dateEnd";
       const url =
         requestModel.categoryType === "EXPENSE" ? urlExpense : urlIcome;
 
@@ -28,11 +28,18 @@ export class ReportHttpRepository implements ReportInterfaceRepository {
               .replace(":accountNumber", "0")
               .replace(
                 ":dateStart",
-                DateTimeService.parse(requestModel.dateStart, DATE_FORMATS.Date)
+                encodeURIComponent(
+                  DateTimeService.parse(
+                    requestModel.dateStart,
+                    DATE_FORMATS.Date
+                  )
+                )
               )
               .replace(
                 ":dateEnd",
-                DateTimeService.parse(requestModel.dateEnd, DATE_FORMATS.Date)
+                encodeURIComponent(
+                  DateTimeService.parse(requestModel.dateEnd, DATE_FORMATS.Date)
+                )
               ),
         })
         .then((response) => {

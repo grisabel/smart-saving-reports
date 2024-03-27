@@ -4,7 +4,7 @@ import { ReportHttpRepository } from "./ReportHttpRepository";
 const httpMock = HttpMockAdapterFactory.getInstance();
 
 httpMock.onGet(
-  "financial-control/accounts/:accountNumber/reports/income?dateFrom=:dateStart&dateTo=:dateEnd",
+  "/financial-control/accounts/:accountNumber/reports/income?dateFrom=:dateStart&dateTo=:dateEnd",
   () => {
     return Promise.resolve({
       status: 200,
@@ -31,7 +31,7 @@ httpMock.onGet(
 );
 
 httpMock.onGet(
-  "financial-control/accounts/:accountNumber/reports/expense?dateFrom=:dateStart&dateTo=:dateEnd",
+  "/financial-control/accounts/:accountNumber/reports/expense?dateFrom=:dateStart&dateTo=:dateEnd",
   () => {
     return Promise.resolve({
       status: 200,

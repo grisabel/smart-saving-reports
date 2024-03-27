@@ -4,19 +4,19 @@ import { UserMockRepository } from "./ReportMockRepository";
 import { HttpFactory } from "@/utils/Http/HttpFactory";
 import { HttpMockAdapterFactory } from "@/utils/Http/HttpMockAdapterFactory";
 
-export class HabitsFactoryRepository {
+export class ReportFactoryRepository {
   private static instance: ReportInterfaceRepository | null = null;
 
   static getInstance(): ReportInterfaceRepository {
-    if (!HabitsFactoryRepository.instance) {
+    if (!ReportFactoryRepository.instance) {
       if (import.meta.env.VITE_MODE === "production") {
         const http = HttpFactory.getInstance();
-        HabitsFactoryRepository.instance = new ReportHttpRepository(http);
+        ReportFactoryRepository.instance = new ReportHttpRepository(http);
       } else {
         const httpMock = HttpMockAdapterFactory.getInstance();
-        HabitsFactoryRepository.instance = new UserMockRepository(httpMock);
+        ReportFactoryRepository.instance = new UserMockRepository(httpMock);
       }
     }
-    return HabitsFactoryRepository.instance;
+    return ReportFactoryRepository.instance;
   }
 }
