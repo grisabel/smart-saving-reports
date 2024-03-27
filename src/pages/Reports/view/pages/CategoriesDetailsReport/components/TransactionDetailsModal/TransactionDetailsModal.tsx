@@ -5,6 +5,7 @@ import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext"
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
 import { TransactionResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/TransactionListResponseModel";
+import { useAppCtx } from "@/AppProvider";
 
 const categoryRespository = CategoryFactoryRespository.getInstance();
 const reportRepository = ReportFactoryRepository.getInstance();
@@ -18,6 +19,7 @@ export interface TransactionDataFilter {
 const TransactionDetailsModal: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [data, setDate] = useState<TransactionResponseModel | null>(null);
+  const { setLoading } = useAppCtx();
 
   const { filter, setFilter, categoryType } = useCategoriesDetailsCtx();
 
@@ -29,6 +31,7 @@ const TransactionDetailsModal: React.FC = () => {
 
     console.log({ category, dateStart, dateEnd });
 
+    setLoading(true);
     reportRepository
       .transactionList({
         categoryType: categoryType,
@@ -44,6 +47,7 @@ const TransactionDetailsModal: React.FC = () => {
       })
       .finally(() => {
         setOpen(true);
+        setLoading(false);
       });
   }, [filter]);
 

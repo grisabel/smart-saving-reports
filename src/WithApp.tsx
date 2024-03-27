@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import AppProvider from "./AppProvider";
 
 import "./i18n";
 import "./index.scss";
@@ -13,7 +14,11 @@ function WithApp(Component: React.ComponentType) {
       i18n.changeLanguage(lang);
     }, []);
 
-    return <Component />;
+    return (
+      <AppProvider>
+        <Component />
+      </AppProvider>
+    );
   };
 }
 export default WithApp;
