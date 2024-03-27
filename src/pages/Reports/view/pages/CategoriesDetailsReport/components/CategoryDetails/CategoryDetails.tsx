@@ -26,7 +26,9 @@ const CategoryDetails: React.FC = () => {
     <ul>
       {categoryList().map((expense) => {
         return (
-          <li onClick={() => openDetails(expense.id)}>{expense.concept}</li>
+          <li onClick={() => openDetails(expense.id)} key={expense.id}>
+            {expense.concept}
+          </li>
         );
       })}
     </ul>

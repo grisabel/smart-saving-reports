@@ -34,6 +34,12 @@ export class CategoryService {
     ];
   }
 
+  getIncome(id: string): CategoryModel | null {
+    return (
+      (this.getIcomeList() || []).find((income) => (income.id = id)) ?? null
+    );
+  }
+
   getExpenseList(): CategoryModel[] {
     return [
       {
@@ -117,5 +123,11 @@ export class CategoryService {
         icon: "restaurant",
       },
     ];
+  }
+
+  getExpense(id: string): CategoryModel | null {
+    return (
+      (this.getExpenseList() || []).find((expense) => (expense.id = id)) ?? null
+    );
   }
 }
