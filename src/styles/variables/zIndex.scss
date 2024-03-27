@@ -1,0 +1,9 @@
+$z-index: (
+  modal: 201,
+  modal-backdrop: 200,
+  menu-mobile: 100,
+);
+
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}
