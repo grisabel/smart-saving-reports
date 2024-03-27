@@ -28,7 +28,6 @@ const Icon: React.FC<IconProps> = ({ name, color, onClick, className }) => {
   useEffect(() => {
     import(`./SmartSavingsIcon/build/smartsaving-${name}.icon.mjs`)
       .then((module) => {
-        console.log({module})
         const { data } = Object.values(module)[0] as {
           name: string;
           data: string;
@@ -42,13 +41,12 @@ const Icon: React.FC<IconProps> = ({ name, color, onClick, className }) => {
           rerender((prev) => prev + 1);
         }
       })
-      .catch((error) =>{
-        console.log({error})
+      .catch((error) => {
+        console.log({ error });
         console.log(
           `data: we could not find the Icon with the name ${name}, did you add it to assets folder?`
-        )
-      }
-      );
+        );
+      });
   }, [name]);
 
   if (spanElRef.current) {
