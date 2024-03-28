@@ -1,7 +1,7 @@
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
 import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext";
 
-import styles from "./CategoryDetails.scss";
+// import styles from "./CategoryDetails.scss";
 
 const categoryRespository = CategoryFactoryRespository.getInstance();
 
@@ -20,7 +20,7 @@ const CategoryDetails: React.FC = () => {
   const categoryList =
     categoryType === "EXPENSE"
       ? categoryRespository.getExpenseList
-      : categoryRespository.getIcomeList;
+      : categoryRespository.getIncomeList;
 
   return (
     <ul>

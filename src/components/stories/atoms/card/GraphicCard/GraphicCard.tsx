@@ -3,7 +3,6 @@ import styles from "./GraphicCard.module.scss";
 
 import CardBase from "@/components/stories/atoms/card/CardBase";
 import Icon from "@/components/stories/atoms/Icon";
-import { SmartSavingsIconName } from "../../Icon/SmartSavingsIcon";
 
 interface GraphicCardProps {
   amount: number;

@@ -15,6 +15,7 @@ const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
   dateMin,
   onlyRead,
   disableFormatChange,
+  className,
   onChange = () => null,
   ...props
 }) => {
@@ -163,7 +164,7 @@ const CalendarRangePicker: React.FC<CalendarRangePickerProps> = ({
   };
 
   return (
-    <div className={styles.CalendarRangePickerWP}>
+    <div className={`${styles.CalendarRangePickerWP} ${className}`}>
       {!onlyRead && (
         <CircleBtn
           iconName="chevron-left"

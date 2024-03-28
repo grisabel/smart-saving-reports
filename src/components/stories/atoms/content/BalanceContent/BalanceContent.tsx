@@ -6,12 +6,14 @@ interface BalanceContentProps {
   title: string;
   amount: string;
   type?: "expense" | "income";
+  className?: string;
 }
 
 const BalanceContent: React.FC<BalanceContentProps> = ({
   title,
   amount,
   type,
+  className,
 }) => {
   const amountClasses = [styles.amount];
   if (type === "income") {
@@ -21,7 +23,7 @@ const BalanceContent: React.FC<BalanceContentProps> = ({
   }
 
   return (
-    <ContentBase>
+    <ContentBase className={className}>
       <div className={styles.balanceContentWp}>
         <p className={styles.title}>{title}</p>
         <p className={amountClasses.join(" ")}>{amount} €</p>
