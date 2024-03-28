@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CategoryBtn from "@/components/stories/atoms/buttons/CategoryBtn";
 import CardBase from "@/components/stories/atoms/card/CardBase";
 import styles from "./ItemCategory.module.scss";
@@ -24,7 +24,7 @@ const ItemCategory: React.FC<ItemCategoryProps> = ({
         <CategoryBtn iconName={category} readOnly={true} onClick={onClick} />
 
         <div className={styles.data}>
-          <p>{categoryName}</p>
+          <p className={styles.category}>{categoryName}</p>
           <p className={`${styles.amount} ${styles[`amount--${type}`]}`}>
             {amount}€
           </p>

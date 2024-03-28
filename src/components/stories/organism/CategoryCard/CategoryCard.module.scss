@@ -11,12 +11,12 @@
 
   @include f--b2-light;
 
-  @media (min-width: $bpMdMin) {
-    $size: 1rem;
+  // @media (min-width: 690px) {
+  //   $size: 1rem;
 
-    font-size: $size;
-    line-height: $size * 1.5;
-  }
+  //   font-size: $size;
+  //   line-height: $size * 1.5;
+  // }
 
   button {
     width: 48px;

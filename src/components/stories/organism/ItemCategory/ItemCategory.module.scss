@@ -17,7 +17,7 @@
 
     @include f--b2-light;
 
-    @media (min-width: $bpMdMin) {
+    @media (min-width: 690px) {
       $size: 1rem;
 
       font-size: $size;
@@ -37,11 +37,15 @@
       justify-content: space-between;
       align-items: center;
 
+      .category {
+        text-align: left;
+      }
+
       .amount {
-        width: 34px;
+        min-width: 34px;
         flex-shrink: 0;
         @media (min-width: $bpMdMin) {
-          width: 48px;
+          min-width: 48px;
         }
         &--income {
           color: var(--success-main);

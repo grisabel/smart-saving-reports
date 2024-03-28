@@ -17,10 +17,10 @@ export type HttpPutRequest = HttpRequest;
 export type HttpPatchRequest = HttpRequest;
 export type HttpDeleteRequest = Omit<HttpRequest, "body">;
 
+//@ts-ignore
 export type HttpResponse<T> = Response;
 
 export interface HttpInterfaceService {
-
   setAccessToken(value: string | null): void;
 
   get<T>({ endpoint, headers }: HttpGetRequest): Promise<HttpResponse<T>>;

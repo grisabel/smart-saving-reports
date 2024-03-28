@@ -1,4 +1,3 @@
-import { HttpService } from "@/utils/Http/HttpService";
 import type { ReportInterfaceRepository } from "./ReportInterfaceRepository";
 import type { HttpInterfaceService } from "@/utils/Http/HttpInterfaceService";
 import { CategortListResponseModel } from "./model/response/CategortListResponseModel";

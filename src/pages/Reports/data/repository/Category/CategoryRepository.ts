@@ -9,7 +9,7 @@ export interface CategoryModel {
 export class CategoryService {
   constructor() {}
 
-  getIcomeList(): CategoryModel[] {
+  getIncomeList(): CategoryModel[] {
     return [
       {
         id: "INCOME-1",
@@ -36,7 +36,7 @@ export class CategoryService {
 
   getIncome(id: string): CategoryModel | null {
     return (
-      (this.getIcomeList() || []).find((income) => (income.id = id)) ?? null
+      (this.getIncomeList() || []).find((income) => income.id === id) ?? null
     );
   }
 
@@ -127,7 +127,7 @@ export class CategoryService {
 
   getExpense(id: string): CategoryModel | null {
     return (
-      (this.getExpenseList() || []).find((expense) => (expense.id = id)) ?? null
+      (this.getExpenseList() || []).find((expense) => expense.id === id) ?? null
     );
   }
 }

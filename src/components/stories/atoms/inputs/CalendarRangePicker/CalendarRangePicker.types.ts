@@ -9,6 +9,7 @@ export interface CalendarRangePickerProps {
   format: "year" | "month";
   isYear?: boolean | null;
   onlyRead?: boolean;
+  className?: string;
   disableFormatChange?: boolean;
 
   onChange: (value: CalendarRangePickerChangeEvent) => void;
