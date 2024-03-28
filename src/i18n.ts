@@ -43,6 +43,8 @@ i18n
           insurance: "Insurance",
           car: "Car",
           restaurant: "Restaurants",
+
+          details: "Details",
         },
       },
       es: {
@@ -75,6 +77,8 @@ i18n
           insurance: "Seguros",
           car: "Coche",
           restaurant: "Restaurantes",
+
+          details: "Detalles",
         },
       },
     },

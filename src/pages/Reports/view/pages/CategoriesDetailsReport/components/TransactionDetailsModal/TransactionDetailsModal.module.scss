@@ -1,0 +1,6 @@
+@import "@/styles/variables/breakpoints.scss";
+.category {
+  @media (min-width: $bpMdMin) {
+    margin: 16px 0;
+  }
+}

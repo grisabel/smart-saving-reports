@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext";
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
-import { TransactionResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/TransactionListResponseModel";
+import { TransactionListResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/TransactionListResponseModel";
 import { useAppCtx } from "@/AppProvider";
+import { useTranslation } from "react-i18next";
+import styles from "./TransactionDetailsModal.module.scss";
+import CategoryCard from "@/components/stories/organism/CategoryCard";
+import { CategoryCardProps } from "@/components/stories/organism/CategoryCard/CategoryCard";
 
 const categoryRespository = CategoryFactoryRespository.getInstance();
 const reportRepository = ReportFactoryRepository.getInstance();
@@ -18,8 +22,10 @@ export interface TransactionDataFilter {
 
 const TransactionDetailsModal: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [data, setDate] = useState<TransactionResponseModel | null>(null);
+  const [data, setData] = useState<TransactionListResponseModel | null>(null);
+  const [dataCategory, setDataCategory] = useState<CategoryCardProps>();
   const { setLoading } = useAppCtx();
+  const { t } = useTranslation();
 
   const { filter, setFilter, categoryType } = useCategoriesDetailsCtx();
 
@@ -28,8 +34,6 @@ const TransactionDetailsModal: React.FC = () => {
     if (!category || !dateEnd || !dateStart) {
       return;
     }
-
-    console.log({ category, dateStart, dateEnd });
 
     setLoading(true);
     reportRepository
@@ -40,8 +44,19 @@ const TransactionDetailsModal: React.FC = () => {
         dateStart: dateStart,
       })
       .then((resul) => {
-        setDate(resul);
+        setData(resul);
+        console.log(JSON.stringify(resul));
         setOpen(true);
+        const totalAmount = resul.reduce(
+          (sum, current) => sum + current.amount,
+          0
+        );
+        setDataCategory({
+          amount: Number(totalAmount.toFixed(2)),
+          category: getCategoryName(filter.category),
+          categoryName: t(getCategoryName(filter.category ?? "")),
+          type: categoryType === "EXPENSE" ? "expense" : "income",
+        });
       })
       .catch((error) => {
         console.log({ error });
@@ -65,17 +80,16 @@ const TransactionDetailsModal: React.FC = () => {
         ? categoryRespository.getExpense(category)
         : categoryRespository.getIncome(category);
 
-    return categoryModel?.concept; // TODO ADD TRANSLATION LIERAL AL MODELO / sERVICIO
+    return categoryModel?.icon;
   };
 
   return (
     open &&
     filter?.category && (
-      <SideModal title="titulo" onClose={handleClose} open={open}>
-        <p>{getCategoryName(filter.category)}</p>
-        <br />
+      <SideModal title={t("details")} onClose={handleClose} open={open}>
+        <CategoryCard {...dataCategory} className={styles.category} />
         <p>{JSON.stringify(filter)}</p>
-        <br />
+
         <p>{JSON.stringify(data)}</p>
       </SideModal>
     )

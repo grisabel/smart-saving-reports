@@ -1,7 +1,7 @@
 import { CategoryListResquestModel } from "./model/request/CategoryListRequestModel";
 import { TransactionListResquestModel } from "./model/request/TransactionListRequestModel";
 import type { CategortListResponseModel } from "./model/response/CategortListResponseModel";
-import { TransactionResponseModel } from "./model/response/TransactionListResponseModel";
+import { TransactionListResponseModel } from "./model/response/TransactionListResponseModel";
 
 export interface ReportInterfaceRepository {
   categoryList(
@@ -10,5 +10,5 @@ export interface ReportInterfaceRepository {
 
   transactionList(
     requestModel: TransactionListResquestModel
-  ): Promise<TransactionResponseModel>;
+  ): Promise<TransactionListResponseModel>;
 }

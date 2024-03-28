@@ -15,7 +15,6 @@ interface CategoryListProps {
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
-  // const [data, setData] = useState<CategortListResponseModel | null>(null);
   const [dataGraph, setDataGraph] = useState<GraphicCardProps>();
   const { setLoading } = useAppCtx();
   const { t } = useTranslation();
@@ -29,7 +28,6 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
         dateStart: DateTimeService.currentDate(),
       })
       .then((resul) => {
-        // setData(resul);
         const totalAmount = resul.reduce(
           (sum, current) => sum + current.amount,
           0
