@@ -4,18 +4,20 @@ import styles from "./GraphicCard.module.scss";
 import CardBase from "@/components/stories/atoms/card/CardBase";
 import Icon from "@/components/stories/atoms/Icon";
 
-interface GraphicCardProps {
-  amount: number;
-  description: string;
+export interface GraphicCardProps {
+  amount?: number;
+  description?: string;
   type?: "expense" | "income";
-  onClick: () => void;
+  children?: React.ReactNode;
+  onClick?: () => void;
 }
 
 const GraphicCard: React.FC<GraphicCardProps> = ({
-  onClick,
+  onClick = () => null,
   amount,
   type,
   description,
+  children,
 }) => {
   type SmartSavingsIconName = "arrow-up" | "arrow-down" | "";
   const [icon, setIcon] = useState<SmartSavingsIconName>("");
@@ -26,8 +28,8 @@ const GraphicCard: React.FC<GraphicCardProps> = ({
   return (
     <CardBase onClick={onClick}>
       <div className={styles.graphicCardWp}>
-        <div className={styles.amount}>
-          <p>{amount}€</p>
+        <div className={styles.data}>
+          <p className={styles.amount}>{amount}€</p>
           <div className={styles.description}>
             <Icon
               name={icon}
@@ -36,6 +38,7 @@ const GraphicCard: React.FC<GraphicCardProps> = ({
             <p>{description}</p>
           </div>
         </div>
+        {children}
       </div>
     </CardBase>
   );

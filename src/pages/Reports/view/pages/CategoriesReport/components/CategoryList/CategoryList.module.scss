@@ -1,0 +1,8 @@
+@import "@/styles/variables/breakpoints.scss";
+
+.categoryListWp {
+  width: 100%;
+  @media (min-width: $bpMdMin) {
+    max-width: 424px;
+  }
+}

@@ -12,7 +12,7 @@ import styles from "./CategoriesReport.module.scss";
 
 const CategoriesReport: React.FC = () => {
   const { t } = useTranslation();
-  const [isExpense] = useState<boolean>(true);
+  const [amount] = useState<number>(0);
 
   const [format, setFormat] = useState<"year" | "month">("year");
   const currentDate = DateTimeService.currentDate();
@@ -32,16 +32,13 @@ const CategoriesReport: React.FC = () => {
   };
   return (
     <div>
-      <LinkBack
-        label={isExpense ? t("expenses") : t("income")}
-        onClick={handleReturn}
-      />
+      <LinkBack label={t("mainAccount")} onClick={handleReturn} />
       <div className={styles.categoryReportWp}>
         <div className={styles.data}>
           <BalanceContent
-            title={isExpense ? t("expenses") : t("income")}
-            amount={"200"}
-            type={isExpense ? "expense" : "income"}
+            title={t("balance")}
+            amount={amount}
+            type={amount >= 0 ? "income" : "expense"}
             className={styles.balance}
           />
           <CalendarRangePicker
@@ -53,8 +50,12 @@ const CategoriesReport: React.FC = () => {
             onChange={handleOnChange}
           />
         </div>
-        <div className={styles.graph}>
-          <CategoryList categoryType={isExpense ? "EXPENSE" : "INCOME"} />
+        <div className={styles.graphDetails}>
+          <p className={styles.title}>{t("incomeExpenses")}</p>
+          <div className={styles.graphs}>
+            <CategoryList categoryType="INCOME" />
+            <CategoryList categoryType="EXPENSE" />
+          </div>
         </div>
       </div>
     </div>

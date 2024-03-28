@@ -2,8 +2,7 @@
 @import "@/styles/variables/breakpoints.scss";
 
 .categoryReportWp {
-  max-width: 664px;
-
+  max-width: 924px;
   .data {
     display: flex;
     flex-wrap: wrap-reverse;
@@ -37,6 +36,27 @@
       .balance {
         min-width: 0;
       }
+    }
+  }
+
+  .graphDetails {
+    margin-top: 64px;
+
+    @media (min-width: 690px) {
+      padding-left: 32px;
+    }
+    .title {
+      text-align: left;
+      margin-bottom: 16px;
+
+      @include f--b1-regular;
+    }
+    .graphs {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      width: 100%;
     }
   }
 }

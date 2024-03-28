@@ -17,14 +17,14 @@ type Story = StoryObj<typeof meta>;
 export const BalanceExpenseExample: Story = {
   args: {
     title: "Content Balance",
-    amount: "500",
+    amount: 500,
     type: "expense",
   },
 };
 export const BalanceIncomeExample: Story = {
   args: {
     title: "Content Balance",
-    amount: "500",
+    amount: 500,
     type: "income",
   },
 };

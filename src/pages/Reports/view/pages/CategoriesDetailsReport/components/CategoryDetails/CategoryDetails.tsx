@@ -103,7 +103,7 @@ const CategoryDetails: React.FC = () => {
         <div className={styles.data}>
           <BalanceContent
             title={categoryType === "EXPENSE" ? t("expenses") : t("income")}
-            amount={"200"}
+            amount={200}
             type={categoryType === "EXPENSE" ? "expense" : "income"}
             className={styles.balance}
           />

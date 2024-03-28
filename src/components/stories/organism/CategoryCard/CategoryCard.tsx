@@ -2,7 +2,7 @@ import React from "react";
 import CategoryBtn from "@/components/stories/atoms/buttons/CategoryBtn";
 import styles from "./CategoryCard.module.scss";
 
-interface CategoryCardProps {
+export interface CategoryCardProps {
   amount: number;
   category: string;
   categoryName: string;

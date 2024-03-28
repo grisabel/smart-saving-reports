@@ -21,6 +21,8 @@ i18n
           balance: "Balance",
           expenses: "Expenses",
           income: "Income",
+          incomeExpenses: "Income and Expenses",
+          mainAccount: "Main Account",
 
           paylist: "Salary",
           revenues: "Revenues",
@@ -51,6 +53,8 @@ i18n
           balance: "Balance",
           expenses: "Gastos",
           income: "Ingresos",
+          incomeExpenses: "Ingresos y Gastos",
+          mainAccount: "Cuenta Principal",
 
           paylist: "Nómina",
           revenues: "Rentas",
