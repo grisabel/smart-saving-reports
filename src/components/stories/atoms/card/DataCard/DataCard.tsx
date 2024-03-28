@@ -1,14 +1,22 @@
 import React from "react";
 import styles from "./DataCard.module.scss";
 
-interface DataCardProps {
+export interface DataCardProps {
   date: string;
   comment: string;
-  amount: string;
+  amount: number;
+  className?: string;
+  key?: string;
   type?: "expense" | "income";
 }
 
-const DataCard: React.FC<DataCardProps> = ({ date, comment, amount, type }) => {
+const DataCard: React.FC<DataCardProps> = ({
+  date,
+  comment,
+  amount,
+  type,
+  className,
+}) => {
   const amountClasses = [styles.amount];
   if (type === "income") {
     amountClasses.push(styles["amount--positive"]);
@@ -16,8 +24,8 @@ const DataCard: React.FC<DataCardProps> = ({ date, comment, amount, type }) => {
     amountClasses.push(styles["amount--negative"]);
   }
   return (
-    <div className={styles.dataCardWp}>
-      <div>
+    <div className={`${styles.dataCardWp} ${className}`}>
+      <div className={styles.data}>
         <p>{date}</p>
         <p className={styles.comment}>{comment}</p>
       </div>

@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { useCategoriesDetailsCtx } from "../../context/CategoriesDetailsContext";
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
-import { TransactionListResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/TransactionListResponseModel";
 import { useAppCtx } from "@/AppProvider";
 import { useTranslation } from "react-i18next";
 import styles from "./TransactionDetailsModal.module.scss";
 import CategoryCard from "@/components/stories/organism/CategoryCard";
 import { CategoryCardProps } from "@/components/stories/organism/CategoryCard/CategoryCard";
 import { SmartSavingsIconName } from "@/components/stories/atoms/Icon/SmartSavingsIcon";
+import DataCard, {
+  DataCardProps,
+} from "@/components/stories/atoms/card/DataCard/DataCard";
 
 const categoryRespository = CategoryFactoryRespository.getInstance();
 const reportRepository = ReportFactoryRepository.getInstance();
@@ -23,7 +25,7 @@ export interface TransactionDataFilter {
 
 const TransactionDetailsModal: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [data, setData] = useState<TransactionListResponseModel | null>(null);
+  const [dataTransaction, setDataTransaction] = useState<DataCardProps[]>();
   const [dataCategory, setDataCategory] = useState<CategoryCardProps>();
   const { setLoading } = useAppCtx();
   const { t } = useTranslation();
@@ -45,8 +47,6 @@ const TransactionDetailsModal: React.FC = () => {
         dateStart: dateStart,
       })
       .then((resul) => {
-        setData(resul);
-        console.log(JSON.stringify(resul));
         setOpen(true);
         const totalAmount = resul.reduce(
           (sum, current) => sum + current.amount,
@@ -60,6 +60,16 @@ const TransactionDetailsModal: React.FC = () => {
           ),
           type: categoryType === "EXPENSE" ? "expense" : "income",
         });
+
+        const transactions: DataCardProps[] = resul.map((item) => ({
+          date: item.date,
+          comment: item.note,
+          amount: item.amount,
+          key: item.transactionId,
+          type: categoryType === "EXPENSE" ? "expense" : "income",
+        }));
+
+        setDataTransaction(transactions);
       })
       .catch((error) => {
         console.log({ error });
@@ -92,9 +102,9 @@ const TransactionDetailsModal: React.FC = () => {
       <SideModal title={t("details")} onClose={handleClose} open={open}>
         <CategoryCard {...dataCategory} className={styles.category} />
 
-        <p>{JSON.stringify(filter)}</p>
-
-        <p>{JSON.stringify(data)}</p>
+        {dataTransaction?.map((item) => (
+          <DataCard key={item.key} {...item} className={styles.transaction} />
+        ))}
       </SideModal>
     )
   );
