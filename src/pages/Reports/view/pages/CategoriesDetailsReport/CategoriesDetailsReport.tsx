@@ -19,7 +19,7 @@ const CategoriesDetailsReport: React.FC = () => {
       dateStart={dateStart}
     >
       <div>
-        <h1>CategoriesDetailsReport {categoryType}</h1>
+        {/* <h1>CategoriesDetailsReport {categoryType}</h1> */}
         <CategoryDetails />
         <TransactionDetailsModal />
       </div>

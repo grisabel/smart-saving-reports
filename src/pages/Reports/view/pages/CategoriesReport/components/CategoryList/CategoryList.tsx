@@ -17,35 +17,35 @@ interface CategoryListProps {
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
-  const [data, setData] = useState<ItemProps[]>([]);
+  // const [data, setData] = useState<ItemProps[]>([]);
   const { setLoading } = useAppCtx();
-  const categoryRepository = CategoryFactoryRespository.getInstance();
-  const { t } = useTranslation();
+  // const categoryRepository = CategoryFactoryRespository.getInstance();
+  // const { t } = useTranslation();
 
-  function transformCategoryAmountsToCategoriesData(
-    categoriesAmounts: CategoryResponseModel[]
-  ): ItemProps[] {
-    return categoriesAmounts.map((categoryAmount) => {
-      let category;
-      if (categoryType === "EXPENSE") {
-        category = categoryRepository.getExpense(
-          categoryAmount.conceptId
-        )?.icon;
-      } else {
-        category = categoryRepository.getIncome(categoryAmount.conceptId)?.icon;
-      }
+  // function transformCategoryAmountsToCategoriesData(
+  //   categoriesAmounts: CategoryResponseModel[]
+  // ): ItemProps[] {
+  //   return categoriesAmounts.map((categoryAmount) => {
+  //     let category;
+  //     if (categoryType === "EXPENSE") {
+  //       category = categoryRepository.getExpense(
+  //         categoryAmount.conceptId
+  //       )?.icon;
+  //     } else {
+  //       category = categoryRepository.getIncome(categoryAmount.conceptId)?.icon;
+  //     }
 
-      return {
-        amount: categoryAmount.amount,
-        category: categoryRepository.getExpense(categoryAmount.conceptId)?.icon,
-        categoryName: t(category ?? ""),
-        type: categoryType === "EXPENSE" ? "expense" : "income",
-        onClick: () => {
-          console.log(`${categoryAmount.conceptId} clicked`);
-        },
-      };
-    });
-  }
+  //     return {
+  //       amount: categoryAmount.amount,
+  //       category: categoryRepository.getExpense(categoryAmount.conceptId)?.icon,
+  //       categoryName: t(category ?? ""),
+  //       type: categoryType === "EXPENSE" ? "expense" : "income",
+  //       onClick: () => {
+  //         console.log(`${categoryAmount.conceptId} clicked`);
+  //       },
+  //     };
+  //   });
+  // }
   useEffect(() => {
     setLoading(true);
     reportsRepository
@@ -55,9 +55,10 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
         dateStart: DateTimeService.currentDate(),
       })
       .then((resul) => {
-        const transformedData = transformCategoryAmountsToCategoriesData(resul);
-        setData(transformedData);
-        console.log(data);
+        // const transformedData = transformCategoryAmountsToCategoriesData(resul);
+        // setData(transformedData);
+        // console.log(data);
+        console.log(resul);
       })
       .catch((error) => {
         console.log({ error });
@@ -69,7 +70,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
 
   return (
     <div className={styles.categoryListWp}>
-      <ItemListCategory items={data} />
+      {/* <ItemListCategory items={data} /> */}
     </div>
   );
 };
