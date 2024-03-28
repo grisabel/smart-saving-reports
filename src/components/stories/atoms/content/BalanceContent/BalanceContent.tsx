@@ -4,7 +4,7 @@ import ContentBase from "../ContentBase";
 
 interface BalanceContentProps {
   title: string;
-  amount: string;
+  amount: number;
   type?: "expense" | "income";
   className?: string;
 }

@@ -2,21 +2,19 @@
 @import "@/styles/variables/fonts.scss";
 
 .graphicCardWp {
-  min-width: 300px;
   background-color: #fff;
   padding: 16px;
   border-radius: 8px;
 
-  @media (min-width: $bpMdMin) {
-    min-width: 430px;
-  }
-
-  .amount {
+  .data {
     width: 100%;
     background-color: var(--color-background-image-login);
     border-radius: 8px;
     padding: 8px;
 
+    .amount {
+      text-align: left;
+    }
     @include f--b1-regular;
   }
 

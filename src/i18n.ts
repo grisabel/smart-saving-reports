@@ -21,6 +21,8 @@ i18n
           balance: "Balance",
           expenses: "Expenses",
           income: "Income",
+          incomeExpenses: "Income and Expenses",
+          mainAccount: "Main Account",
 
           paylist: "Salary",
           revenues: "Revenues",
@@ -41,6 +43,8 @@ i18n
           insurance: "Insurance",
           car: "Car",
           restaurant: "Restaurants",
+
+          details: "Details",
         },
       },
       es: {
@@ -51,6 +55,8 @@ i18n
           balance: "Balance",
           expenses: "Gastos",
           income: "Ingresos",
+          incomeExpenses: "Ingresos y Gastos",
+          mainAccount: "Cuenta Principal",
 
           paylist: "Nómina",
           revenues: "Rentas",
@@ -71,6 +77,8 @@ i18n
           insurance: "Seguros",
           car: "Coche",
           restaurant: "Restaurantes",
+
+          details: "Detalles",
         },
       },
     },

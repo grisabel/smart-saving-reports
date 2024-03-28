@@ -2,13 +2,11 @@ import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportR
 import { CategoryType } from "../../../CategoriesDetailsReport/context/CategoriesDetailsContext";
 import { useEffect, useState } from "react";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
-import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import { useAppCtx } from "@/AppProvider";
-import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
-import { useTranslation } from "react-i18next";
-import ItemListCategory from "@/components/stories/organism/ItemListCategory";
-import { ItemProps } from "@/components/stories/organism/ItemListCategory/ItemListCategory";
 import styles from "./CategoryList.module.scss";
+import { useTranslation } from "react-i18next";
+import GraphicCard from "@/components/stories/atoms/card/GraphicCard";
+import { GraphicCardProps } from "@/components/stories/atoms/card/GraphicCard/GraphicCard";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
@@ -17,35 +15,10 @@ interface CategoryListProps {
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
-  const [data, setData] = useState<ItemProps[]>([]);
+  const [dataGraph, setDataGraph] = useState<GraphicCardProps>();
   const { setLoading } = useAppCtx();
-  const categoryRepository = CategoryFactoryRespository.getInstance();
   const { t } = useTranslation();
 
-  function transformCategoryAmountsToCategoriesData(
-    categoriesAmounts: CategoryResponseModel[]
-  ): ItemProps[] {
-    return categoriesAmounts.map((categoryAmount) => {
-      let category;
-      if (categoryType === "EXPENSE") {
-        category = categoryRepository.getExpense(
-          categoryAmount.conceptId
-        )?.icon;
-      } else {
-        category = categoryRepository.getIncome(categoryAmount.conceptId)?.icon;
-      }
-
-      return {
-        amount: categoryAmount.amount,
-        category: categoryRepository.getExpense(categoryAmount.conceptId)?.icon,
-        categoryName: t(category ?? ""),
-        type: categoryType === "EXPENSE" ? "expense" : "income",
-        onClick: () => {
-          console.log(`${categoryAmount.conceptId} clicked`);
-        },
-      };
-    });
-  }
   useEffect(() => {
     setLoading(true);
     reportsRepository
@@ -55,9 +28,16 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
         dateStart: DateTimeService.currentDate(),
       })
       .then((resul) => {
-        const transformedData = transformCategoryAmountsToCategoriesData(resul);
-        setData(transformedData);
-        console.log(data);
+        const totalAmount = resul.reduce(
+          (sum, current) => sum + current.amount,
+          0
+        );
+        setDataGraph({
+          amount: Number(totalAmount.toFixed(2)),
+          description: categoryType === "EXPENSE" ? t("expenses") : t("income"),
+          type: categoryType === "EXPENSE" ? "expense" : "income",
+          onClick: () => console.log("Graphic card clicked"),
+        });
       })
       .catch((error) => {
         console.log({ error });
@@ -69,7 +49,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
 
   return (
     <div className={styles.categoryListWp}>
-      <ItemListCategory items={data} />
+      {<GraphicCard {...dataGraph} />}
     </div>
   );
 };
