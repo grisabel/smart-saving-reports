@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./TransactionDetailsModal.module.scss";
 import CategoryCard from "@/components/stories/organism/CategoryCard";
 import { CategoryCardProps } from "@/components/stories/organism/CategoryCard/CategoryCard";
+import { SmartSavingsIconName } from "@/components/stories/atoms/Icon/SmartSavingsIcon";
 
 const categoryRespository = CategoryFactoryRespository.getInstance();
 const reportRepository = ReportFactoryRepository.getInstance();
@@ -53,8 +54,10 @@ const TransactionDetailsModal: React.FC = () => {
         );
         setDataCategory({
           amount: Number(totalAmount.toFixed(2)),
-          category: getCategoryName(filter.category),
-          categoryName: t(getCategoryName(filter.category ?? "")),
+          category: getCategoryName(filter.category as SmartSavingsIconName),
+          categoryName: t(
+            getCategoryName(filter.category as SmartSavingsIconName) as string
+          ),
           type: categoryType === "EXPENSE" ? "expense" : "income",
         });
       })
@@ -88,6 +91,7 @@ const TransactionDetailsModal: React.FC = () => {
     filter?.category && (
       <SideModal title={t("details")} onClose={handleClose} open={open}>
         <CategoryCard {...dataCategory} className={styles.category} />
+
         <p>{JSON.stringify(filter)}</p>
 
         <p>{JSON.stringify(data)}</p>

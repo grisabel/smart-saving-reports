@@ -2,8 +2,8 @@
 @import "@/styles/variables/breakpoints.scss";
 
 .cardBase {
-  border-radius: 0;
-  box-shadow: none;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 
   .itemCategoryWp {
     height: 66px;

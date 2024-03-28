@@ -5,7 +5,7 @@ import { CategoryListResquestModel } from "./model/request/CategoryListRequestMo
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { DATE_FORMATS } from "@/utils/Datetime/constants";
 import { TransactionListResquestModel } from "./model/request/TransactionListRequestModel";
-import { TransactionResponseModel } from "./model/response/TransactionListResponseModel";
+import { TransactionListResponseModel } from "./model/response/TransactionListResponseModel";
 
 export class ReportHttpRepository implements ReportInterfaceRepository {
   constructor(private http: HttpInterfaceService) {}
@@ -71,7 +71,7 @@ export class ReportHttpRepository implements ReportInterfaceRepository {
 
   transactionList(
     requestModel: TransactionListResquestModel
-  ): Promise<TransactionResponseModel> {
+  ): Promise<TransactionListResponseModel> {
     return new Promise((resolve, reject) => {
       const urlIcome =
         "/financial-control/accounts/:accountNumber/reports/income/:conceptId?dateFrom=:dateStart&dateTo=:dateEnd";
@@ -81,7 +81,7 @@ export class ReportHttpRepository implements ReportInterfaceRepository {
         requestModel.categoryType === "EXPENSE" ? urlExpense : urlIcome;
 
       return this.http
-        .get<TransactionResponseModel>({
+        .get<TransactionListResponseModel>({
           endpoint:
             import.meta.env.VITE_BASE_URL +
             url
