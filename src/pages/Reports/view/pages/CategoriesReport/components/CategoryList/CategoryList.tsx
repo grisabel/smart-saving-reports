@@ -1,13 +1,8 @@
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
 import { CategoryType } from "../../../CategoriesDetailsReport/context/CategoriesDetailsContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
-import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import { useAppCtx } from "@/AppProvider";
-import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
-import { useTranslation } from "react-i18next";
-import ItemListCategory from "@/components/stories/organism/ItemListCategory";
-import { ItemProps } from "@/components/stories/organism/ItemListCategory/ItemListCategory";
 import styles from "./CategoryList.module.scss";
 
 const reportsRepository = ReportFactoryRepository.getInstance();

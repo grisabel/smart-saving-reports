@@ -16,7 +16,6 @@ import BalanceContent from "@/components/stories/atoms/content/BalanceContent";
 import CalendarRangePicker from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker";
 import { CalendarRangePickerChangeEvent } from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker.types";
 
-const categoryRespository = CategoryFactoryRespository.getInstance();
 const reportsRepository = ReportFactoryRepository.getInstance();
 
 const CategoryDetails: React.FC = () => {
