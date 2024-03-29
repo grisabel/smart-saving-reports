@@ -1,0 +1,23 @@
+@import "@/styles/variables/fonts.scss";
+
+.graphWp {
+  max-width: 250px;
+  .info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    .infoCategory {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      .dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+      }
+      .category {
+        @include f--b2-regular;
+      }
+    }
+  }
+}
