@@ -1,33 +1,34 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 import styles from "./CircleGraph.module.scss";
 
-interface Data {
+export interface CircleGraphData {
   name: string;
   value: number;
   background: string;
   nameCategory: string;
 }
 
-interface CircleGraphProps {
-  data: Data[];
+export interface CircleGraphProps {
+  data: CircleGraphData[];
   isDots?: boolean;
 }
 
 class CircleGraph extends PureComponent<CircleGraphProps> {
   render() {
-    const { data } = this.props;
+    const { data, isDots } = this.props;
+
     return (
       <div className={styles.graphWp}>
-        <PieChart width={320} height={320}>
+        <PieChart width={170} height={170}>
           <Pie
             data={data}
-            cx={120}
-            cy={200}
-            innerRadius={60}
+            cx={85}
+            cy={85}
+            innerRadius={50}
             outerRadius={80}
             fill="#8884d8"
-            paddingAngle={5}
+            paddingAngle={0}
             dataKey="value"
           >
             {data.map((entry, index) => (
@@ -36,7 +37,7 @@ class CircleGraph extends PureComponent<CircleGraphProps> {
           </Pie>
         </PieChart>
         <>
-          {this.props.isDots && (
+          {isDots && (
             <div className={styles.info}>
               {data.map(
                 (entry, index) =>

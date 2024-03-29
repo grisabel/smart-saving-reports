@@ -61,7 +61,7 @@ i18n
           paylist: "Nómina",
           revenues: "Rentas",
           scholarship: "Becas / Subvenciones",
-          bets: "Apuestas/Juego",
+          bets: "Apuestas / Juego",
           mortgage: "Hipoteca / Alquiler / Comunidad",
           food: "Alimentación",
           pets: "Mascotas",
