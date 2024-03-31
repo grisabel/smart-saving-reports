@@ -100,6 +100,10 @@ export default CategoriesReportWithProviders;
 class CategoriesReportMfe extends HTMLElement {
   app: any;
 
+  dateStart?: DateTimeModel;
+  dateEnd?: DateTimeModel;
+  format?: "year" | "month";
+
   connectedCallback() {
     const AppMfe = WithApp<CategoriesReportWithProvidersProps>(
       CategoriesReportWithProviders
@@ -107,11 +111,12 @@ class CategoriesReportMfe extends HTMLElement {
 
     this.app = ReactDOM.createRoot(this);
 
-    const props = {
-      dateStart: undefined,
-      dateEnd: undefined,
-      format: undefined,
+    let props: CategoriesReportWithProvidersProps = {
+      dateStart: this["dateStart"] ?? undefined,
+      dateEnd: this["dateEnd"] ?? undefined,
+      format: this["format"] ?? undefined,
     };
+
     this.app.render(<AppMfe {...props} />);
   }
 
