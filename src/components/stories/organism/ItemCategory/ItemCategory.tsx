@@ -2,6 +2,7 @@ import React from "react";
 import CategoryBtn from "@/components/stories/atoms/buttons/CategoryBtn";
 import CardBase from "@/components/stories/atoms/card/CardBase";
 import styles from "./ItemCategory.module.scss";
+import { formatCurrency } from "@/utils/Currency";
 
 interface ItemCategoryProps {
   amount: number;
@@ -26,7 +27,7 @@ const ItemCategory: React.FC<ItemCategoryProps> = ({
         <div className={styles.data}>
           <p className={styles.category}>{categoryName}</p>
           <p className={`${styles.amount} ${styles[`amount--${type}`]}`}>
-            {amount}€
+            {formatCurrency(amount)}
           </p>
         </div>
       </div>

@@ -1,1 +1,10 @@
 @import "@/styles/globals.scss";
+
+.recharts-wrapper {
+  cursor: pointer !important;
+}
+.recharts-pie-sector {
+  path:focus {
+    outline: none !important;
+  }
+}

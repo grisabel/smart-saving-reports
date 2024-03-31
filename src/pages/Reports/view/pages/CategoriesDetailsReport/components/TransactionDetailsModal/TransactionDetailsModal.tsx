@@ -21,6 +21,7 @@ export interface TransactionDataFilter {
   category: string | null;
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
+  format: "year" | "month";
 }
 
 const TransactionDetailsModal: React.FC = () => {

@@ -9,8 +9,8 @@ import { HttpFactory } from "./utils/Http/HttpFactory";
 
 const httpService = HttpFactory.getInstance();
 
-function WithApp(Component: React.ComponentType) {
-  return () => {
+function WithApp<T extends object>(Component: React.FC<T>) {
+  return (props: T) => {
     const { i18n } = useTranslation();
 
     useEffect(() => {
@@ -39,7 +39,7 @@ function WithApp(Component: React.ComponentType) {
 
     return (
       <AppProvider>
-        <Component />
+        <Component {...props} />
       </AppProvider>
     );
   };

@@ -5,10 +5,7 @@ import ItemListCategory, {
 } from "@/components/stories/organism/ItemListCategory/ItemListCategory";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  CategortListResponseModel,
-  CategoryResponseModel,
-} from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
+import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { useAppCtx } from "@/AppProvider";
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
@@ -19,25 +16,18 @@ import BalanceContent from "@/components/stories/atoms/content/BalanceContent";
 import CalendarRangePicker from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker";
 import { CalendarRangePickerChangeEvent } from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker.types";
 import CircleGraph from "@/components/stories/atoms/graphs/CircleGraph";
-import {
-  CircleGraphData,
-  CircleGraphProps,
-} from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
-import { GraphicCardProps } from "@/components/stories/atoms/card/GraphicCard/GraphicCard";
+import { CircleGraphData } from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
 const CategoryDetails: React.FC = () => {
-  const { setFilter, categoryType } = useCategoriesDetailsCtx();
+  const { filter, setFilter, categoryType } = useCategoriesDetailsCtx();
   const [data, setData] = useState<ItemProps[]>([]);
   const [dataGraph, setDataGraph] = useState<CircleGraphData[]>();
   const { setLoading } = useAppCtx();
   const categoryRepository = CategoryFactoryRespository.getInstance();
   const { t } = useTranslation();
-  const [format, setFormat] = useState<"year" | "month">("year");
-  const currentDate = DateTimeService.currentDate();
-  const initialRange = DateTimeService.getDateLimits(currentDate, "year");
-  const [range, setRange] = useState(initialRange);
+
   const [amount, setAmount] = useState<number>(0);
 
   function transformCategoryAmountsToCategoriesData(
@@ -73,7 +63,17 @@ const CategoryDetails: React.FC = () => {
     });
   };
   const handleReturn = () => {
-    console.log("RETURN");
+    window.dispatchEvent(
+      new CustomEvent("reports:navigateToSummary", {
+        detail: {
+          filter: {
+            dateStart: filter.dateStart,
+            dateEnd: filter.dateEnd,
+            format: filter.format,
+          },
+        },
+      })
+    );
   };
 
   const generateContrastingColor = (iconName: string) => {
@@ -136,11 +136,12 @@ const CategoryDetails: React.FC = () => {
   }
 
   const handleOnChange = (event: CalendarRangePickerChangeEvent) => {
-    setRange({
+    setFilter((prevState) => ({
+      ...prevState,
       dateStart: event.dateStart,
       dateEnd: event.dateEnd,
-    });
-    setFormat(event.format);
+      format: event.format,
+    }));
   };
 
   useEffect(() => {
@@ -148,8 +149,8 @@ const CategoryDetails: React.FC = () => {
     reportsRepository
       .categoryList({
         categoryType,
-        dateEnd: DateTimeService.currentDate(),
-        dateStart: DateTimeService.currentDate(),
+        dateEnd: filter.dateEnd,
+        dateStart: filter.dateStart,
       })
       .then((resul) => {
         const totalAmount = resul.reduce(
@@ -168,7 +169,9 @@ const CategoryDetails: React.FC = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [filter]);
+
+  const currentDate = DateTimeService.currentDate();
 
   return (
     <div>
@@ -186,9 +189,9 @@ const CategoryDetails: React.FC = () => {
           />
           <CalendarRangePicker
             dateMax={currentDate}
-            dateStart={range.dateStart}
-            dateEnd={range.dateEnd}
-            format={format}
+            dateStart={filter.dateStart}
+            dateEnd={filter.dateEnd}
+            format={filter.format}
             className={styles.date}
             onChange={handleOnChange}
           />

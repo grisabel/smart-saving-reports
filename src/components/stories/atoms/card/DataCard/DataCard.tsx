@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./DataCard.module.scss";
+import { formatCurrency } from "@/utils/Currency";
 
 export interface DataCardProps {
   date: string;
@@ -29,7 +30,7 @@ const DataCard: React.FC<DataCardProps> = ({
         <p>{date}</p>
         <p className={styles.comment}>{comment}</p>
       </div>
-      <p className={amountClasses.join(" ")}>{amount}€</p>
+      <p className={amountClasses.join(" ")}>{formatCurrency(amount)}</p>
     </div>
   );
 };

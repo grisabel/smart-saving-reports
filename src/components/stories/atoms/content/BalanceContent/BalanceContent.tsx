@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./BalanceContent.module.scss";
 import ContentBase from "../ContentBase";
+import { formatCurrency } from "@/utils/Currency";
 
 interface BalanceContentProps {
   title: string;
@@ -26,7 +27,7 @@ const BalanceContent: React.FC<BalanceContentProps> = ({
     <ContentBase className={className}>
       <div className={styles.balanceContentWp}>
         <p className={styles.title}>{title}</p>
-        <p className={amountClasses.join(" ")}>{amount} €</p>
+        <p className={amountClasses.join(" ")}>{formatCurrency(amount)}</p>
       </div>
     </ContentBase>
   );

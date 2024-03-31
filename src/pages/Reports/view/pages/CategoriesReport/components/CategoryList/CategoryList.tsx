@@ -1,7 +1,6 @@
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
 import { CategoryType } from "../../../CategoriesDetailsReport/context/CategoriesDetailsContext";
 import { useEffect, useState } from "react";
-import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { useAppCtx } from "@/AppProvider";
 import styles from "./CategoryList.module.scss";
 import { useTranslation } from "react-i18next";
@@ -12,18 +11,25 @@ import CircleGraph, {
 } from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
 import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
+import { useCategoriesReportCtx } from "../../context/CategoriesReportContext";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
 interface CategoryListProps {
   categoryType: CategoryType;
+  setAmount: (value: number) => void;
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
+const CategoryList: React.FC<CategoryListProps> = ({
+  categoryType,
+  setAmount,
+}) => {
   const [dataGraph, setDataGraph] = useState<GraphicCardProps>();
   const { setLoading } = useAppCtx();
   const categoryRepository = CategoryFactoryRespository.getInstance();
   const { t } = useTranslation();
+
+  const { filter } = useCategoriesReportCtx();
 
   const generateContrastingColor = (iconName: string) => {
     const iconHash = Array.from(iconName).reduce(
@@ -83,13 +89,29 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
       };
     });
   }
+
+  const handleOnClick = () => {
+    window.dispatchEvent(
+      new CustomEvent("reports:navigateToDetails", {
+        detail: {
+          filter: {
+            categoryType: categoryType,
+            dateStart: filter.dateStart,
+            dateEnd: filter.dateEnd,
+            format: filter.format,
+          },
+        },
+      })
+    );
+  };
+
   useEffect(() => {
     setLoading(true);
     reportsRepository
       .categoryList({
         categoryType,
-        dateEnd: DateTimeService.currentDate(),
-        dateStart: DateTimeService.currentDate(),
+        dateEnd: filter.dateEnd,
+        dateStart: filter.dateStart,
       })
       .then((resul) => {
         const totalAmount = resul.reduce(
@@ -101,7 +123,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
           amount: Number(totalAmount.toFixed(2)),
           description: categoryType === "EXPENSE" ? t("expenses") : t("income"),
           type: categoryType === "EXPENSE" ? "expense" : "income",
-          onClick: () => console.log("Graphic card clicked"),
+          onClick: handleOnClick,
           children: (
             <CircleGraph
               data={transformCategoryAmountsToCircleGraphData(resul) ?? []}
@@ -109,6 +131,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
             />
           ),
         });
+
+        setAmount(totalAmount);
       })
       .catch((error) => {
         console.log({ error });
@@ -116,7 +140,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [filter]);
 
   return (
     <div className={styles.categoryListWp}>

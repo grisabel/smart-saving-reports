@@ -3,6 +3,7 @@ import styles from "./GraphicCard.module.scss";
 
 import CardBase from "@/components/stories/atoms/card/CardBase";
 import Icon from "@/components/stories/atoms/Icon";
+import { formatCurrency } from "@/utils/Currency";
 
 export interface GraphicCardProps {
   amount?: number;
@@ -14,7 +15,7 @@ export interface GraphicCardProps {
 
 const GraphicCard: React.FC<GraphicCardProps> = ({
   onClick = () => null,
-  amount,
+  amount = 0,
   type,
   description,
   children,
@@ -29,7 +30,7 @@ const GraphicCard: React.FC<GraphicCardProps> = ({
     <CardBase onClick={onClick}>
       <div className={styles.graphicCardWp}>
         <div className={styles.data}>
-          <p className={styles.amount}>{amount}€</p>
+          <p className={styles.amount}>{formatCurrency(amount)}</p>
           <div className={styles.description}>
             <Icon
               name={icon}

@@ -7,16 +7,30 @@ import CategoriesDetailsProvider, {
   CategoryType,
 } from "./context/CategoriesDetailsContext";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
+import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 
-const CategoriesDetailsReport: React.FC = () => {
-  const categoryType: CategoryType = "EXPENSE";
-  const dateStart = DateTimeService.currentDate();
-  const dateEnd = DateTimeService.currentDate();
+interface CategoriesDetailsReportProps {
+  categoryType?: CategoryType;
+  dateEnd?: DateTimeModel;
+  dateStart?: DateTimeModel;
+  format?: "year" | "month";
+}
+
+const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
+  categoryType,
+  dateEnd,
+  dateStart,
+  format,
+}) => {
+  const currentDate = DateTimeService.currentDate();
+  const initialRange = DateTimeService.getDateLimits(currentDate, "year");
+
   return (
     <CategoriesDetailsProvider
-      categoryType={categoryType}
-      dateEnd={dateEnd}
-      dateStart={dateStart}
+      categoryType={categoryType || "EXPENSE"}
+      dateEnd={dateEnd || initialRange.dateEnd}
+      dateStart={dateStart || initialRange.dateStart}
+      format={format || "year"}
     >
       <div>
         <CategoryDetails />
@@ -31,10 +45,25 @@ export default CategoriesDetailsReport;
 class CategoriesDetailsReportMfe extends HTMLElement {
   app: any;
 
+  categoryType?: CategoryType;
+  dateStart?: DateTimeModel;
+  dateEnd?: DateTimeModel;
+  format?: "year" | "month";
+
   connectedCallback() {
-    const AppMfe = WithApp(CategoriesDetailsReport);
+    const AppMfe = WithApp<CategoriesDetailsReportProps>(
+      CategoriesDetailsReport
+    );
     this.app = ReactDOM.createRoot(this);
-    this.app.render(<AppMfe />);
+
+    let props: CategoriesDetailsReportProps = {
+      categoryType: this["categoryType"] ?? undefined,
+      dateStart: this["dateStart"] ?? undefined,
+      dateEnd: this["dateEnd"] ?? undefined,
+      format: this["format"] ?? undefined,
+    };
+
+    this.app.render(<AppMfe {...props} />);
   }
 
   disconnectedCallback() {
