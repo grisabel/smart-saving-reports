@@ -99,6 +99,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
             categoryType: categoryType,
             dateStart: filter.dateStart,
             dateEnd: filter.dateEnd,
+            format: filter.format,
           },
         },
       })

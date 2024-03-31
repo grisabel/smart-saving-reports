@@ -13,12 +13,14 @@ interface CategoriesDetailsReportProps {
   categoryType: CategoryType;
   dateEnd: DateTimeModel;
   dateStart: DateTimeModel;
+  format: "year" | "month";
 }
 
 const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
   categoryType,
   dateEnd,
   dateStart,
+  format,
 }) => {
   const currentDate = DateTimeService.currentDate();
   const initialRange = DateTimeService.getDateLimits(currentDate, "year");
@@ -28,6 +30,7 @@ const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
       categoryType={categoryType || "EXPENSE"}
       dateEnd={dateEnd || initialRange.dateEnd}
       dateStart={dateStart || initialRange.dateStart}
+      format={format || "year"}
     >
       <div>
         <CategoryDetails />

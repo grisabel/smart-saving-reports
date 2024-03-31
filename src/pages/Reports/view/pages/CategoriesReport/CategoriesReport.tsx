@@ -19,8 +19,6 @@ const CategoriesReport: React.FC = () => {
 
   const { filter, setFilter } = useCategoriesReportCtx();
 
-  const [format, setFormat] = useState<"year" | "month">("year");
-
   const [incomes, setIncomes] = useState<number>(0);
   const [expenses, setExpenses] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
@@ -39,8 +37,8 @@ const CategoriesReport: React.FC = () => {
     setFilter({
       dateStart: event.dateStart,
       dateEnd: event.dateEnd,
+      format: event.format,
     });
-    setFormat(event.format);
   };
   return (
     <div>
@@ -57,7 +55,7 @@ const CategoriesReport: React.FC = () => {
             dateMax={currentDate}
             dateStart={filter.dateStart}
             dateEnd={filter.dateEnd}
-            format={format}
+            format={filter.format}
             className={styles.date}
             onChange={handleOnChange}
           />
@@ -77,11 +75,12 @@ const CategoriesReport: React.FC = () => {
 interface CategoriesReportWithProvidersProps {
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
+  format: "year" | "month";
 }
 
 const CategoriesReportWithProviders: React.FC<
   CategoriesReportWithProvidersProps
-> = ({ dateEnd, dateStart }) => {
+> = ({ dateEnd, dateStart, format }) => {
   const currentDate = DateTimeService.currentDate();
   const initialRange = DateTimeService.getDateLimits(currentDate, "year");
 
@@ -89,6 +88,7 @@ const CategoriesReportWithProviders: React.FC<
     <CategoriesReportProvider
       dateStart={dateStart || initialRange.dateStart}
       dateEnd={dateEnd || initialRange.dateEnd}
+      format={format || "year"}
     >
       <CategoriesReport />
     </CategoriesReportProvider>

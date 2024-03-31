@@ -30,6 +30,7 @@ const CategoriesReportWp = () => {
             dateStart: filter.dateStart,
             dateEnd: filter.dateEnd,
             categoryType: filter.categoryType,
+            format: filter.format,
           },
         },
       });
@@ -51,15 +52,17 @@ const CategoriesReportWp = () => {
   });
 
   return (
-    <CategoriesReport dateEnd={filter?.dateEnd} dateStart={filter?.dateStart} />
+    <CategoriesReport
+      dateEnd={filter?.dateEnd}
+      dateStart={filter?.dateStart}
+      format={filter?.format}
+    />
   );
 };
 
 const CategoriesDetailsReportWp = () => {
   const location = useLocation();
   const { filter } = location.state || {};
-
-  console.log({ filter });
 
   const navigate = useNavigate();
 
@@ -72,6 +75,7 @@ const CategoriesDetailsReportWp = () => {
           filter: {
             dateStart: filter.dateStart,
             dateEnd: filter.dateEnd,
+            format: filter.format,
           },
         },
       });
@@ -88,6 +92,7 @@ const CategoriesDetailsReportWp = () => {
       categoryType={filter?.categoryType}
       dateEnd={filter?.dateEnd}
       dateStart={filter?.dateStart}
+      format={filter?.format}
     />
   );
 };

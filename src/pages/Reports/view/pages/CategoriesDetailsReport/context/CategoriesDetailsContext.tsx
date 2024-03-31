@@ -25,8 +25,10 @@ const CategoriesDetailsProvider: React.FC<{
   categoryType: CategoryType;
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
-}> = ({ children, categoryType, dateEnd, dateStart }) => {
+  format: "year" | "month";
+}> = ({ children, categoryType, dateEnd, dateStart, format }) => {
   const [filter, setFilter] = useState<TransactionDataFilter>({
+    format: format || "year",
     category: null,
     dateStart,
     dateEnd,

@@ -27,7 +27,6 @@ const CategoryDetails: React.FC = () => {
   const { setLoading } = useAppCtx();
   const categoryRepository = CategoryFactoryRespository.getInstance();
   const { t } = useTranslation();
-  const [format, setFormat] = useState<"year" | "month">("year");
 
   const [amount, setAmount] = useState<number>(0);
 
@@ -70,6 +69,7 @@ const CategoryDetails: React.FC = () => {
           filter: {
             dateStart: filter.dateStart,
             dateEnd: filter.dateEnd,
+            format: filter.format,
           },
         },
       })
@@ -140,8 +140,8 @@ const CategoryDetails: React.FC = () => {
       ...prevState,
       dateStart: event.dateStart,
       dateEnd: event.dateEnd,
+      format: event.format,
     }));
-    setFormat(event.format);
   };
 
   useEffect(() => {
@@ -191,7 +191,7 @@ const CategoryDetails: React.FC = () => {
             dateMax={currentDate}
             dateStart={filter.dateStart}
             dateEnd={filter.dateEnd}
-            format={format}
+            format={filter.format}
             className={styles.date}
             onChange={handleOnChange}
           />

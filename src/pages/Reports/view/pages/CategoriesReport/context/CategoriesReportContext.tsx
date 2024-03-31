@@ -10,6 +10,7 @@ import {
 export interface CategoriesReportFilter {
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
+  format: "year" | "month";
 }
 
 interface CategoriesDetailsContextInterface {
@@ -25,10 +26,12 @@ const CategoriesReportProvider: React.FC<{
   children: React.ReactNode;
   dateStart: DateTimeModel;
   dateEnd: DateTimeModel;
-}> = ({ children, dateEnd, dateStart }) => {
+  format: "year" | "month";
+}> = ({ children, dateEnd, dateStart, format }) => {
   const [filter, setFilter] = useState<CategoriesReportFilter>({
     dateStart,
     dateEnd,
+    format,
   });
 
   const context = {
