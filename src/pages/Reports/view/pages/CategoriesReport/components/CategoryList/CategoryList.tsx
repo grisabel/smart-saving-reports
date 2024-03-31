@@ -1,7 +1,6 @@
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
 import { CategoryType } from "../../../CategoriesDetailsReport/context/CategoriesDetailsContext";
 import { useEffect, useState } from "react";
-import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { useAppCtx } from "@/AppProvider";
 import styles from "./CategoryList.module.scss";
 import { useTranslation } from "react-i18next";
