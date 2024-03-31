@@ -12,6 +12,7 @@ import CircleGraph, {
 } from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
 import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import { CategoryFactoryRespository } from "@/pages/Reports/data/repository/Category/CategoryFactory";
+import { useCategoriesReportCtx } from "../../context/CategoriesReportContext";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 
@@ -24,6 +25,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
   const { setLoading } = useAppCtx();
   const categoryRepository = CategoryFactoryRespository.getInstance();
   const { t } = useTranslation();
+
+  const { filter } = useCategoriesReportCtx();
 
   const generateContrastingColor = (iconName: string) => {
     const iconHash = Array.from(iconName).reduce(
@@ -88,8 +91,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
     reportsRepository
       .categoryList({
         categoryType,
-        dateEnd: DateTimeService.currentDate(),
-        dateStart: DateTimeService.currentDate(),
+        dateEnd: filter.dateEnd,
+        dateStart: filter.dateStart,
       })
       .then((resul) => {
         const totalAmount = resul.reduce(
@@ -116,7 +119,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [filter]);
 
   return (
     <div className={styles.categoryListWp}>

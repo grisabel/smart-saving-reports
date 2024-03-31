@@ -9,22 +9,26 @@ import CalendarRangePicker from "@/components/stories/atoms/inputs/CalendarRange
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { CalendarRangePickerChangeEvent } from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker.types";
 import styles from "./CategoriesReport.module.scss";
+import CategoriesReportProvider, {
+  useCategoriesReportCtx,
+} from "./context/CategoriesReportContext";
 
 const CategoriesReport: React.FC = () => {
   const { t } = useTranslation();
   const [amount] = useState<number>(0);
 
+  const { filter, setFilter } = useCategoriesReportCtx();
+
   const [format, setFormat] = useState<"year" | "month">("year");
+
   const currentDate = DateTimeService.currentDate();
-  const initialRange = DateTimeService.getDateLimits(currentDate, "year");
-  const [range, setRange] = useState(initialRange);
 
   const handleReturn = () => {
     console.log("RETURN");
   };
 
   const handleOnChange = (event: CalendarRangePickerChangeEvent) => {
-    setRange({
+    setFilter({
       dateStart: event.dateStart,
       dateEnd: event.dateEnd,
     });
@@ -43,8 +47,8 @@ const CategoriesReport: React.FC = () => {
           />
           <CalendarRangePicker
             dateMax={currentDate}
-            dateStart={range.dateStart}
-            dateEnd={range.dateEnd}
+            dateStart={filter.dateStart}
+            dateEnd={filter.dateEnd}
             format={format}
             className={styles.date}
             onChange={handleOnChange}
@@ -62,7 +66,21 @@ const CategoriesReport: React.FC = () => {
   );
 };
 
-export default CategoriesReport;
+const CategoriesReportWithProviders = () => {
+  const currentDate = DateTimeService.currentDate();
+  const initialRange = DateTimeService.getDateLimits(currentDate, "year");
+
+  return (
+    <CategoriesReportProvider
+      dateStart={initialRange.dateStart}
+      dateEnd={initialRange.dateEnd}
+    >
+      <CategoriesReport />
+    </CategoriesReportProvider>
+  );
+};
+
+export default CategoriesReportWithProviders;
 
 class CategoriesReportMfe extends HTMLElement {
   app: any;
