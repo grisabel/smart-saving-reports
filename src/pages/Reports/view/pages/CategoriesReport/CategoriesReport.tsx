@@ -12,6 +12,7 @@ import styles from "./CategoriesReport.module.scss";
 import CategoriesReportProvider, {
   useCategoriesReportCtx,
 } from "./context/CategoriesReportContext";
+import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 
 const CategoriesReport: React.FC = () => {
   const { t } = useTranslation();
@@ -73,14 +74,21 @@ const CategoriesReport: React.FC = () => {
   );
 };
 
-const CategoriesReportWithProviders = () => {
+interface CategoriesReportWithProvidersProps {
+  dateStart: DateTimeModel;
+  dateEnd: DateTimeModel;
+}
+
+const CategoriesReportWithProviders: React.FC<
+  CategoriesReportWithProvidersProps
+> = ({ dateEnd, dateStart }) => {
   const currentDate = DateTimeService.currentDate();
   const initialRange = DateTimeService.getDateLimits(currentDate, "year");
 
   return (
     <CategoriesReportProvider
-      dateStart={initialRange.dateStart}
-      dateEnd={initialRange.dateEnd}
+      dateStart={dateStart || initialRange.dateStart}
+      dateEnd={dateEnd || initialRange.dateEnd}
     >
       <CategoriesReport />
     </CategoriesReportProvider>
@@ -89,20 +97,20 @@ const CategoriesReportWithProviders = () => {
 
 export default CategoriesReportWithProviders;
 
-class CategoriesReportMfe extends HTMLElement {
-  app: any;
+// class CategoriesReportMfe extends HTMLElement {
+//   app: any;
 
-  connectedCallback() {
-    const AppMfe = WithApp(CategoriesReport);
-    this.app = ReactDOM.createRoot(this);
-    this.app.render(<AppMfe />);
-  }
+//   connectedCallback() {
+//     const AppMfe = WithApp(CategoriesReport);
+//     this.app = ReactDOM.createRoot(this);
+//     this.app.render(<AppMfe />);
+//   }
 
-  disconnectedCallback() {
-    if (this.app) {
-      this.app.unmount();
-    }
-  }
-}
+//   disconnectedCallback() {
+//     if (this.app) {
+//       this.app.unmount();
+//     }
+//   }
+// }
 
-customElements.define("categories-report-mfe", CategoriesReportMfe);
+// customElements.define("categories-report-mfe", CategoriesReportMfe);

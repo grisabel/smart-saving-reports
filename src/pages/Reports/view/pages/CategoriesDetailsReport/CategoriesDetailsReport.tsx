@@ -7,22 +7,27 @@ import CategoriesDetailsProvider, {
   CategoryType,
 } from "./context/CategoriesDetailsContext";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
+import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 
 interface CategoriesDetailsReportProps {
   categoryType: CategoryType;
+  dateEnd: DateTimeModel;
+  dateStart: DateTimeModel;
 }
 
 const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
   categoryType,
+  dateEnd,
+  dateStart,
 }) => {
   const currentDate = DateTimeService.currentDate();
   const initialRange = DateTimeService.getDateLimits(currentDate, "year");
 
   return (
     <CategoriesDetailsProvider
-      categoryType={categoryType}
-      dateEnd={initialRange.dateEnd}
-      dateStart={initialRange.dateStart}
+      categoryType={categoryType || "EXPENSE"}
+      dateEnd={dateEnd || initialRange.dateEnd}
+      dateStart={dateStart || initialRange.dateStart}
     >
       <div>
         <CategoryDetails />

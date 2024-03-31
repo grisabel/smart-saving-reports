@@ -64,7 +64,16 @@ const CategoryDetails: React.FC = () => {
     });
   };
   const handleReturn = () => {
-    window.dispatchEvent(new CustomEvent("reports:navigateToSummary"));
+    window.dispatchEvent(
+      new CustomEvent("reports:navigateToSummary", {
+        detail: {
+          filter: {
+            dateStart: filter.dateStart,
+            dateEnd: filter.dateEnd,
+          },
+        },
+      })
+    );
   };
 
   const generateContrastingColor = (iconName: string) => {

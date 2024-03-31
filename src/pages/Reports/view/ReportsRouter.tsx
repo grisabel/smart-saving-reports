@@ -16,6 +16,11 @@ const CategoriesReport = React.lazy(() => import("./pages/CategoriesReport"));
 const CategoriesReportWp = () => {
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const { filter } = location.state || {};
+
+  console.log({ filter });
+
   useEffect(() => {
     const callback = (event: any) => {
       const { filter } = event.detail;
@@ -45,7 +50,9 @@ const CategoriesReportWp = () => {
     };
   });
 
-  return <CategoriesReport />;
+  return (
+    <CategoriesReport dateEnd={filter?.dateEnd} dateStart={filter?.dateStart} />
+  );
 };
 
 const CategoriesDetailsReportWp = () => {
@@ -57,8 +64,17 @@ const CategoriesDetailsReportWp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const callback = () => {
-      navigate(ABSOLUTE_ROUTES_REPORTS.SUMMARY);
+    const callback = (event: any) => {
+      const { filter } = event.detail;
+
+      navigate(ABSOLUTE_ROUTES_REPORTS.SUMMARY, {
+        state: {
+          filter: {
+            dateStart: filter.dateStart,
+            dateEnd: filter.dateEnd,
+          },
+        },
+      });
     };
     window.addEventListener("reports:navigateToSummary", callback);
 
@@ -67,7 +83,13 @@ const CategoriesDetailsReportWp = () => {
     };
   }, []);
 
-  return <CategoriesDetailsReport categoryType={filter.categoryType} />;
+  return (
+    <CategoriesDetailsReport
+      categoryType={filter?.categoryType}
+      dateEnd={filter?.dateEnd}
+      dateStart={filter?.dateStart}
+    />
+  );
 };
 
 function ReportsRouter() {
