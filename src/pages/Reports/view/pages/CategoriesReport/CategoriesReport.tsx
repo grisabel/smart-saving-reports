@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import CategoryList from "./components/CategoryList/CategoryList";
 import LinkBack from "@/components/stories/atoms/links/LinkBack";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BalanceContent from "@/components/stories/atoms/content/BalanceContent";
 import CalendarRangePicker from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
@@ -15,13 +15,20 @@ import CategoriesReportProvider, {
 
 const CategoriesReport: React.FC = () => {
   const { t } = useTranslation();
-  const [amount] = useState<number>(0);
 
   const { filter, setFilter } = useCategoriesReportCtx();
 
   const [format, setFormat] = useState<"year" | "month">("year");
 
+  const [incomes, setIncomes] = useState<number>(0);
+  const [expenses, setExpenses] = useState<number>(0);
+  const [amount, setAmount] = useState<number>(0);
+
   const currentDate = DateTimeService.currentDate();
+
+  useEffect(() => {
+    setAmount(incomes - expenses);
+  }, [incomes, expenses]);
 
   const handleReturn = () => {
     console.log("RETURN");
@@ -57,8 +64,8 @@ const CategoriesReport: React.FC = () => {
         <div className={styles.graphDetails}>
           <p className={styles.title}>{t("incomeExpenses")}</p>
           <div className={styles.graphs}>
-            <CategoryList categoryType="INCOME" />
-            <CategoryList categoryType="EXPENSE" />
+            <CategoryList categoryType="INCOME" setAmount={setIncomes} />
+            <CategoryList categoryType="EXPENSE" setAmount={setExpenses} />
           </div>
         </div>
       </div>

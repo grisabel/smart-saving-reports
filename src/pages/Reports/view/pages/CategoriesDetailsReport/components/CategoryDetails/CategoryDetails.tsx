@@ -5,10 +5,7 @@ import ItemListCategory, {
 } from "@/components/stories/organism/ItemListCategory/ItemListCategory";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  CategortListResponseModel,
-  CategoryResponseModel,
-} from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
+import { CategoryResponseModel } from "@/pages/Reports/data/repository/ReportRepository/model/response/CategortListResponseModel";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { useAppCtx } from "@/AppProvider";
 import { ReportFactoryRepository } from "@/pages/Reports/data/repository/ReportRepository/ReportFactoryRepository";
@@ -19,11 +16,7 @@ import BalanceContent from "@/components/stories/atoms/content/BalanceContent";
 import CalendarRangePicker from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker";
 import { CalendarRangePickerChangeEvent } from "@/components/stories/atoms/inputs/CalendarRangePicker/CalendarRangePicker.types";
 import CircleGraph from "@/components/stories/atoms/graphs/CircleGraph";
-import {
-  CircleGraphData,
-  CircleGraphProps,
-} from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
-import { GraphicCardProps } from "@/components/stories/atoms/card/GraphicCard/GraphicCard";
+import { CircleGraphData } from "@/components/stories/atoms/graphs/CircleGraph/CircleGraph";
 
 const reportsRepository = ReportFactoryRepository.getInstance();
 

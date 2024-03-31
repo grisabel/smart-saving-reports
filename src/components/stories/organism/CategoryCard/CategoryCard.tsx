@@ -2,6 +2,7 @@ import React from "react";
 import CategoryBtn from "@/components/stories/atoms/buttons/CategoryBtn";
 import styles from "./CategoryCard.module.scss";
 import { SmartSavingsIconName } from "../../atoms/Icon/SmartSavingsIcon";
+import { formatCurrency } from "@/utils/Currency";
 
 export interface CategoryCardProps {
   amount?: number;
@@ -14,7 +15,7 @@ export interface CategoryCardProps {
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
   onClick = () => null,
-  amount,
+  amount = 0,
   type,
   categoryName,
   category,
@@ -31,7 +32,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
       <div className={styles.data}>
         <p className={styles.category}>{categoryName}</p>
         <p className={`${styles.amount} ${styles[`amount--${type}`]}`}>
-          {amount}€
+          {formatCurrency(amount)}
         </p>
       </div>
     </div>

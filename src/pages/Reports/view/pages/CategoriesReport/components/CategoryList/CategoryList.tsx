@@ -18,9 +18,13 @@ const reportsRepository = ReportFactoryRepository.getInstance();
 
 interface CategoryListProps {
   categoryType: CategoryType;
+  setAmount: (value: number) => void;
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
+const CategoryList: React.FC<CategoryListProps> = ({
+  categoryType,
+  setAmount,
+}) => {
   const [dataGraph, setDataGraph] = useState<GraphicCardProps>();
   const { setLoading } = useAppCtx();
   const categoryRepository = CategoryFactoryRespository.getInstance();
@@ -112,6 +116,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ categoryType }) => {
             />
           ),
         });
+
+        setAmount(totalAmount);
       })
       .catch((error) => {
         console.log({ error });
