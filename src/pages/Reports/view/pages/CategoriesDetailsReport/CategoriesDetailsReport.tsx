@@ -10,10 +10,10 @@ import DateTimeService from "@/utils/Datetime/DatetimeService";
 import { DateTimeModel } from "@/utils/Datetime/DatetimeInterfaceService";
 
 interface CategoriesDetailsReportProps {
-  categoryType: CategoryType;
-  dateEnd: DateTimeModel;
-  dateStart: DateTimeModel;
-  format: "year" | "month";
+  categoryType?: CategoryType;
+  dateEnd?: DateTimeModel;
+  dateStart?: DateTimeModel;
+  format?: "year" | "month";
 }
 
 const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
@@ -42,23 +42,32 @@ const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
 
 export default CategoriesDetailsReport;
 
-// class CategoriesDetailsReportMfe extends HTMLElement {
-//   app: any;
+class CategoriesDetailsReportMfe extends HTMLElement {
+  app: any;
 
-//   connectedCallback() {
-//     const AppMfe = WithApp(CategoriesDetailsReport);
-//     this.app = ReactDOM.createRoot(this);
-//     this.app.render(<AppMfe />);
-//   }
+  connectedCallback() {
+    const AppMfe = WithApp<CategoriesDetailsReportProps>(
+      CategoriesDetailsReport
+    );
+    this.app = ReactDOM.createRoot(this);
 
-//   disconnectedCallback() {
-//     if (this.app) {
-//       this.app.unmount();
-//     }
-//   }
-// }
+    const props = {
+      categoryType: undefined,
+      dateStart: undefined,
+      dateEnd: undefined,
+      format: undefined,
+    };
+    this.app.render(<AppMfe {...props} />);
+  }
 
-// customElements.define(
-//   "categories-details-report-mfe",
-//   CategoriesDetailsReportMfe
-// );
+  disconnectedCallback() {
+    if (this.app) {
+      this.app.unmount();
+    }
+  }
+}
+
+customElements.define(
+  "categories-details-report-mfe",
+  CategoriesDetailsReportMfe
+);

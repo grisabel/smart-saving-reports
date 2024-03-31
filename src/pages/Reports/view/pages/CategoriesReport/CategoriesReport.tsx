@@ -73,9 +73,9 @@ const CategoriesReport: React.FC = () => {
 };
 
 interface CategoriesReportWithProvidersProps {
-  dateStart: DateTimeModel;
-  dateEnd: DateTimeModel;
-  format: "year" | "month";
+  dateStart?: DateTimeModel;
+  dateEnd?: DateTimeModel;
+  format?: "year" | "month";
 }
 
 const CategoriesReportWithProviders: React.FC<
@@ -97,20 +97,29 @@ const CategoriesReportWithProviders: React.FC<
 
 export default CategoriesReportWithProviders;
 
-// class CategoriesReportMfe extends HTMLElement {
-//   app: any;
+class CategoriesReportMfe extends HTMLElement {
+  app: any;
 
-//   connectedCallback() {
-//     const AppMfe = WithApp(CategoriesReport);
-//     this.app = ReactDOM.createRoot(this);
-//     this.app.render(<AppMfe />);
-//   }
+  connectedCallback() {
+    const AppMfe = WithApp<CategoriesReportWithProvidersProps>(
+      CategoriesReportWithProviders
+    );
 
-//   disconnectedCallback() {
-//     if (this.app) {
-//       this.app.unmount();
-//     }
-//   }
-// }
+    this.app = ReactDOM.createRoot(this);
 
-// customElements.define("categories-report-mfe", CategoriesReportMfe);
+    const props = {
+      dateStart: undefined,
+      dateEnd: undefined,
+      format: undefined,
+    };
+    this.app.render(<AppMfe {...props} />);
+  }
+
+  disconnectedCallback() {
+    if (this.app) {
+      this.app.unmount();
+    }
+  }
+}
+
+customElements.define("categories-report-mfe", CategoriesReportMfe);
