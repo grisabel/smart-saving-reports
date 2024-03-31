@@ -10,13 +10,14 @@ import DateTimeService from "@/utils/Datetime/DatetimeService";
 
 const CategoriesDetailsReport: React.FC = () => {
   const categoryType: CategoryType = "EXPENSE";
-  const dateStart = DateTimeService.currentDate();
-  const dateEnd = DateTimeService.currentDate();
+  const currentDate = DateTimeService.currentDate();
+  const initialRange = DateTimeService.getDateLimits(currentDate, "year");
+
   return (
     <CategoriesDetailsProvider
       categoryType={categoryType}
-      dateEnd={dateEnd}
-      dateStart={dateStart}
+      dateEnd={initialRange.dateEnd}
+      dateStart={initialRange.dateStart}
     >
       <div>
         <CategoryDetails />
