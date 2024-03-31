@@ -90,6 +90,21 @@ const CategoryList: React.FC<CategoryListProps> = ({
       };
     });
   }
+
+  const handleOnClick = () => {
+    window.dispatchEvent(
+      new CustomEvent("reports:navigateToDetails", {
+        detail: {
+          filter: {
+            categoryType: categoryType,
+            dateStart: filter.dateStart,
+            dateEnd: filter.dateEnd,
+          },
+        },
+      })
+    );
+  };
+
   useEffect(() => {
     setLoading(true);
     reportsRepository
@@ -108,7 +123,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
           amount: Number(totalAmount.toFixed(2)),
           description: categoryType === "EXPENSE" ? t("expenses") : t("income"),
           type: categoryType === "EXPENSE" ? "expense" : "income",
-          onClick: () => console.log("Graphic card clicked"),
+          onClick: handleOnClick,
           children: (
             <CircleGraph
               data={transformCategoryAmountsToCircleGraphData(resul) ?? []}

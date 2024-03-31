@@ -64,7 +64,7 @@ const CategoryDetails: React.FC = () => {
     });
   };
   const handleReturn = () => {
-    console.log("RETURN");
+    window.dispatchEvent(new CustomEvent("reports:navigateToSummary"));
   };
 
   const generateContrastingColor = (iconName: string) => {

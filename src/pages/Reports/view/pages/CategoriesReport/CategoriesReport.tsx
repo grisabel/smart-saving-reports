@@ -31,7 +31,7 @@ const CategoriesReport: React.FC = () => {
   }, [incomes, expenses]);
 
   const handleReturn = () => {
-    console.log("RETURN");
+    window.dispatchEvent(new CustomEvent("reports:exit"));
   };
 
   const handleOnChange = (event: CalendarRangePickerChangeEvent) => {

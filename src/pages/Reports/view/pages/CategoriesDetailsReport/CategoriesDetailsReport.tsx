@@ -8,8 +8,13 @@ import CategoriesDetailsProvider, {
 } from "./context/CategoriesDetailsContext";
 import DateTimeService from "@/utils/Datetime/DatetimeService";
 
-const CategoriesDetailsReport: React.FC = () => {
-  const categoryType: CategoryType = "EXPENSE";
+interface CategoriesDetailsReportProps {
+  categoryType: CategoryType;
+}
+
+const CategoriesDetailsReport: React.FC<CategoriesDetailsReportProps> = ({
+  categoryType,
+}) => {
   const currentDate = DateTimeService.currentDate();
   const initialRange = DateTimeService.getDateLimits(currentDate, "year");
 
@@ -29,23 +34,23 @@ const CategoriesDetailsReport: React.FC = () => {
 
 export default CategoriesDetailsReport;
 
-class CategoriesDetailsReportMfe extends HTMLElement {
-  app: any;
+// class CategoriesDetailsReportMfe extends HTMLElement {
+//   app: any;
 
-  connectedCallback() {
-    const AppMfe = WithApp(CategoriesDetailsReport);
-    this.app = ReactDOM.createRoot(this);
-    this.app.render(<AppMfe />);
-  }
+//   connectedCallback() {
+//     const AppMfe = WithApp(CategoriesDetailsReport);
+//     this.app = ReactDOM.createRoot(this);
+//     this.app.render(<AppMfe />);
+//   }
 
-  disconnectedCallback() {
-    if (this.app) {
-      this.app.unmount();
-    }
-  }
-}
+//   disconnectedCallback() {
+//     if (this.app) {
+//       this.app.unmount();
+//     }
+//   }
+// }
 
-customElements.define(
-  "categories-details-report-mfe",
-  CategoriesDetailsReportMfe
-);
+// customElements.define(
+//   "categories-details-report-mfe",
+//   CategoriesDetailsReportMfe
+// );

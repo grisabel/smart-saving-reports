@@ -42,10 +42,10 @@ const Icon: React.FC<IconProps> = ({ name, color, onClick, className }) => {
         }
       })
       .catch((error) => {
-        console.log({ error });
-        console.log(
-          `data: we could not find the Icon with the name ${name}, did you add it to assets folder?`
-        );
+        // console.log({ error });
+        // console.log(
+        //   `data: we could not find the Icon with the name ${name}, did you add it to assets folder?`
+        // );
       });
   }, [name]);
 
