@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppProvider from "./AppProvider";
 
@@ -12,6 +12,7 @@ const httpService = HttpFactory.getInstance();
 function WithApp<T extends object>(Component: React.FC<T>) {
   return (props: T) => {
     const { i18n } = useTranslation();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
       // Language Logic
@@ -39,7 +40,12 @@ function WithApp<T extends object>(Component: React.FC<T>) {
       }
 
       httpService.setAccessToken(accessToken);
+      setIsLoading(false)
     }, []);
+
+    if(isLoading){
+      return null;
+    }
 
     return (
       <AppProvider>
