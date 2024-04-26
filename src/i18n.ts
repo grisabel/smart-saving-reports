@@ -23,6 +23,7 @@ i18n
           income: "Income",
           incomeExpenses: "Income and Expenses",
           mainAccount: "Main Account",
+          noData: "Currently there is no data!",
 
           paylist: "Salary",
           revenues: "Revenues",
@@ -57,6 +58,7 @@ i18n
           income: "Ingresos",
           incomeExpenses: "Ingresos y Gastos",
           mainAccount: "Cuenta Principal",
+          noData: "¡Actualmente no hay datos!",
 
           paylist: "Nómina",
           revenues: "Rentas",

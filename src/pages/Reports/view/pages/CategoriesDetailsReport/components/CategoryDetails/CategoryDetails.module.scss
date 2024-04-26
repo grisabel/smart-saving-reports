@@ -45,5 +45,9 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+
+    .noData {
+      @include f--b1-bold;
+    }
   }
 }
