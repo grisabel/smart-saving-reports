@@ -23,6 +23,7 @@ const CircleBtn: React.FC<CircleBtnProps> = ({
       onClick={handleClick}
       disabled={disabled}
       className={styles.CircleBtnWp}
+      aria-label="arrow-change"
     >
       <Icon name={iconName} className={`${styles.icon} ${styles[iconName]}`} />
     </button>
