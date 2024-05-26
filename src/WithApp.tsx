@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppProvider from "./AppProvider";
 
@@ -12,6 +12,7 @@ const httpService = HttpFactory.getInstance();
 function WithApp<T extends object>(Component: React.FC<T>) {
   return (props: T) => {
     const { i18n } = useTranslation();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
       // Language Logic
@@ -20,8 +21,12 @@ function WithApp<T extends object>(Component: React.FC<T>) {
 
       //Session Logic
       const queryParams = new URLSearchParams(window.location.search);
-      const accessToken = queryParams.get("accessToken");
-      const refreshToken = queryParams.get("refreshToken");
+      const accessToken = queryParams.get("accessToken") ||  window.localStorage.getItem(
+        LOCAL_STORAGE_KEYS.accessToken,
+      );
+      const refreshToken = queryParams.get("refreshToken") ||  window.localStorage.getItem(
+        LOCAL_STORAGE_KEYS.refreshToken,
+      );
 
       if (accessToken && refreshToken) {
         window.localStorage.setItem(
@@ -35,7 +40,12 @@ function WithApp<T extends object>(Component: React.FC<T>) {
       }
 
       httpService.setAccessToken(accessToken);
+      setIsLoading(false)
     }, []);
+
+    if(isLoading){
+      return null;
+    }
 
     return (
       <AppProvider>

@@ -197,7 +197,11 @@ const CategoryDetails: React.FC = () => {
           />
         </div>
         <div className={styles.categoryListWp}>
-          <CircleGraph data={dataGraph ?? []} isDots={false} />
+          {dataGraph && dataGraph.length > 0 ? (
+            <CircleGraph data={dataGraph} isDots={false} />
+          ) : (
+            <p className={styles.noData}>{t("noData")}</p>
+          )}
           <ItemListCategory items={data} />
         </div>
       </div>

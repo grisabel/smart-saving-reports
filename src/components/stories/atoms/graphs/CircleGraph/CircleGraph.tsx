@@ -16,7 +16,17 @@ export interface CircleGraphProps {
 
 class CircleGraph extends PureComponent<CircleGraphProps> {
   render() {
-    const { data, isDots } = this.props;
+    let { data, isDots } = this.props;
+
+    if (data.length == 0) {
+      data.push({
+        name: "empty",
+        nameCategory: "empty",
+        value: 100,
+        background: "#545f70",
+      });
+      isDots = false;
+    }
 
     return (
       <div className={styles.graphWp}>
