@@ -1,0 +1,47 @@
+@import "@/styles/variables/breakpoints.scss";
+@import "@/styles/variables/fonts.scss";
+
+.graphicCardWp {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+
+  .data {
+    width: 100%;
+    background-color: var(--color-background-image-login);
+    border-radius: 8px;
+    padding: 8px;
+
+    .amount {
+      text-align: left;
+    }
+    @include f--b1-regular;
+  }
+
+  .description {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    span {
+      height: 16px;
+    }
+
+    .icon {
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      &--income {
+        svg {
+          color: var(--success-main) !important;
+        }
+      }
+      &--expense {
+        svg {
+          color: var(--red-main) !important;
+        }
+      }
+    }
+  }
+}

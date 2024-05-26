@@ -1,0 +1,62 @@
+@import "@/styles/variables/fonts.scss";
+@import "@/styles/variables/breakpoints.scss";
+
+.categoryReportWp {
+  max-width: 924px;
+  .data {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    gap: 16px;
+
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 32px;
+
+    .balance {
+      flex-grow: 1;
+      width: calc(100% - 240px - 16px);
+      min-width: 244px;
+      height: 80px;
+    }
+
+    .date {
+      flex-grow: 1;
+    }
+
+    @media (min-width: 690px) {
+      padding: 0 0 0 32px;
+      .date {
+        flex-grow: 0;
+        max-width: 240px;
+      }
+    }
+
+    @media (min-width: $bpMdMin) {
+      .balance {
+        min-width: 0;
+      }
+    }
+  }
+
+  .graphDetails {
+    margin: 64px 0 32px 0;
+
+    @media (min-width: 690px) {
+      padding-left: 32px;
+    }
+    .title {
+      text-align: left;
+      margin-bottom: 16px;
+
+      @include f--b1-regular;
+    }
+    .graphs {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+}

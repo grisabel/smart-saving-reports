@@ -1,0 +1,43 @@
+@import "@/styles/variables/fonts.scss";
+@import "@/styles/variables/breakpoints.scss";
+
+.itemCategoryWp {
+  width: 100%;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background-color: white;
+
+  @include f--b1-light;
+
+  button {
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .data {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+
+    .category {
+      text-align: left;
+    }
+    .amount {
+      width: 34px;
+      flex-shrink: 0;
+      @media (min-width: $bpMdMin) {
+        width: 48px;
+      }
+      &--income {
+        color: var(--success-main);
+      }
+      &--expense {
+        color: var(--red-main);
+      }
+    }
+  }
+}

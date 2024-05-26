@@ -1,0 +1,31 @@
+@import "@/styles/variables/fonts.scss";
+
+.graphWp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+
+  .info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    justify-content: center;
+    .infoCategory {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      .dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+      }
+      .category {
+        text-align: left;
+        @include f--b2-regular;
+      }
+    }
+  }
+}
